@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Designed around SC-Youtube-header.png:
+     deep navy night sky · sky blue · red marquee · white · hand-drawn atomic stars -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,42 +8,59 @@
   <title>Redhead Pod – Coming Soon</title>
   <meta name="description" content="Redhead Pod – from Stacy Cashmore, the Redhead in a Swing Dress. Where tech, life, and joy meet. Coming soon." />
 
-  <!-- Fonts: Playfair Display (headings) · Josefin Sans (body) · Dancing Script (accent) -->
+  <!-- Fonts:
+       Fredoka One  – chunky retro display (marquee-sign feel)
+       Lato         – clean modern body
+       Dancing Script – handwritten accent -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Josefin+Sans:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Reset & base ──────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* ── Brand colour tokens (from the illustration) ──────────── */
     :root {
-      --midnight:  #0d0b14;
-      --deep:      #140f22;
-      --purple:    #1e1332;
-      --gold:      #c9922a;
-      --gold-lt:   #e4b84a;
-      --crimson:   #a8223c;
-      --crimson-lt:#d63354;
-      --cream:     #f0e6d0;
-      --grey:      #9a8ea8;
-      --font-head: 'Playfair Display', Georgia, serif;
-      --font-body: 'Josefin Sans', sans-serif;
-      --font-acc:  'Dancing Script', cursive;
+      --navy:         #0e1545;   /* deep night-sky blue */
+      --navy-mid:     #1a2370;   /* mid-navy for sections */
+      --navy-deep:    #0a0e30;   /* deeper navy (notify section end) */
+      --navy-darkest: #070b22;   /* footer background */
+      --sky:          #7ab8d4;   /* classic convertible / sky accent */
+      --sky-lt:       #b8dde8;   /* light sky / cloud edge */
+      --sky-a30:      rgba(122,184,212,0.3);  /* sky at 30% opacity */
+      --sky-a40:      rgba(122,184,212,0.4);  /* sky at 40% opacity */
+      --sky-a60:      rgba(122,184,212,0.6);  /* sky at 60% opacity */
+      --sky-a07:      rgba(122,184,212,0.07); /* sky at 7% opacity */
+      --red:          #cc2222;   /* marquee sign red */
+      --red-lt:       #e84040;   /* hover / lighter red */
+      --red-a30:      rgba(204,34,34,0.3);    /* red at 30% opacity */
+      --red-a45:      rgba(204,34,34,0.45);   /* red at 45% opacity */
+      --red-a15:      rgba(204,34,34,0.15);   /* red at 15% opacity */
+      --white:        #ffffff;
+      --white-a04:    rgba(255,255,255,0.04); /* white at 4% opacity */
+      --white-a06:    rgba(255,255,255,0.06); /* white at 6% opacity */
+      --white-a35:    rgba(255,255,255,0.35); /* white at 35% opacity */
+      --white-a12:    rgba(255,255,255,0.12); /* white at 12% opacity */
+      --grey:         #8daab8;
+
+      --font-display: 'Fredoka One', 'Arial Rounded MT Bold', sans-serif;
+      --font-body:    'Lato', sans-serif;
+      --font-acc:     'Dancing Script', cursive;
     }
+
+    /* ── Reset ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--midnight);
-      color: var(--cream);
+      background-color: var(--navy);
+      color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* ── Star canvas (fixed background) ───────────────────────── */
+    /* ── Star canvas (hand-drawn atomic style, fixed layer) ───── */
     #stars-canvas {
       position: fixed;
       inset: 0;
@@ -51,195 +70,178 @@
       pointer-events: none;
     }
 
-    /* ── Section base ──────────────────────────────────────────── */
-    section {
+    /* ── Sections ─────────────────────────────────────────────── */
+    section, footer {
       position: relative;
       z-index: 1;
-      padding: 5rem 1.5rem;
     }
 
     .inner {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
+      padding: 0 1.5rem;
       text-align: center;
     }
 
-    /* ── Bewitched starburst divider ───────────────────────────── */
-    .divider {
+    /* ── Section divider: retro marquee-dots row ──────────────── */
+    .marquee-divider {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin: 2.5rem auto;
-      max-width: 480px;
+      justify-content: center;
+      gap: 0.45rem;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
     }
-    .divider-line {
+    .marquee-divider span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      opacity: 0.7;
+      animation: dot-pulse 1.8s ease-in-out infinite;
+    }
+    .marquee-divider span:nth-child(2) { animation-delay: 0.2s; }
+    .marquee-divider span:nth-child(3) { animation-delay: 0.4s; }
+    .marquee-divider span:nth-child(4) { animation-delay: 0.6s; }
+    .marquee-divider span:nth-child(5) { animation-delay: 0.8s; }
+    .marquee-divider span:nth-child(6) { animation-delay: 1.0s; }
+    .marquee-divider span:nth-child(7) { animation-delay: 1.2s; }
+    @keyframes dot-pulse {
+      0%, 100% { opacity: 0.35; transform: scale(0.85); }
+      50%       { opacity: 1;    transform: scale(1.15); }
+    }
+    .marquee-divider .line {
       flex: 1;
+      max-width: 80px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-    /* Atomic-age starburst motif */
-    .divider-burst {
-      position: relative;
-      width: 2.2rem;
-      height: 2.2rem;
-      flex-shrink: 0;
-      animation: spin-slow 18s linear infinite;
-    }
-    @keyframes spin-slow {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.55; transform: scale(1.2); }
+      background: linear-gradient(90deg, transparent, var(--sky), transparent);
+      border-radius: 0;
+      animation: none;
+      width: auto;
     }
 
-    /* ── HERO ──────────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════ HERO ════════ */
     #hero {
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      background: radial-gradient(ellipse at 55% 30%, #2e1158 0%, #180c30 45%, var(--midnight) 80%);
+      justify-content: flex-start;
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+      padding-bottom: 4rem;
     }
 
-    /* ── Logo portrait ─────────────────────────────────────────── */
-    .logo-wrap {
-      position: relative;
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 2rem;
+    /* The brand illustration banner */
+    .hero-banner {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      /* Image has a white/sky bottom — blend into navy with a bottom gradient mask */
+      mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
     }
 
-    /* Outer spinning starburst ring */
-    .logo-wrap .burst-ring {
-      position: absolute;
-      inset: -18px;
-      animation: spin-slow 22s linear infinite;
+    /* Text block sitting below the illustration */
+    .hero-text {
+      padding: 0 1.5rem;
+      text-align: center;
+      margin-top: -2rem; /* pull up under the fading illustration edge */
     }
 
-    /* Inner slow counter-spin */
-    .logo-wrap .burst-ring-inner {
-      position: absolute;
-      inset: -8px;
-      animation: spin-slow 14s linear infinite reverse;
-      opacity: 0.6;
-    }
-
-    .logo-portrait {
-      position: relative;
-      z-index: 2;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--gold);
-      box-shadow:
-        0 0 0 6px rgba(201,146,42,0.15),
-        0 0 40px rgba(201,146,42,0.25),
-        0 0 80px rgba(168,34,60,0.2);
-    }
-
-    /* Magic sparkle on portrait */
-    .logo-wrap::after {
-      content: '✦';
-      position: absolute;
-      top: -4px;
-      right: -4px;
-      z-index: 3;
-      font-size: 1.4rem;
-      color: var(--gold-lt);
-      animation: pulse 2.4s ease-in-out infinite;
-      filter: drop-shadow(0 0 6px var(--gold));
-    }
-
-    /* ── Hero text ─────────────────────────────────────────────── */
     .hero-eyebrow {
       font-family: var(--font-acc);
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-      color: var(--gold-lt);
+      font-size: clamp(1.1rem, 2.6vw, 1.55rem);
+      color: var(--sky);
       letter-spacing: 0.04em;
-      margin-bottom: 0.3rem;
-    }
-
-    .hero-title {
-      font-family: var(--font-head);
-      font-size: clamp(3.4rem, 10vw, 7.8rem);
-      font-weight: 700;
-      line-height: 1.0;
-      letter-spacing: -0.01em;
-      background: linear-gradient(135deg, var(--cream) 10%, var(--gold-lt) 50%, var(--crimson-lt) 90%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
       margin-bottom: 0.4rem;
     }
 
-    /* Bewitched-style italic flourish subtitle */
-    .hero-tag {
-      font-family: var(--font-head);
-      font-style: italic;
-      font-size: clamp(1.0rem, 2.3vw, 1.35rem);
-      color: var(--crimson-lt);
-      letter-spacing: 0.04em;
-      margin-bottom: 0.3rem;
+    /* Marquee-sign style title */
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 11vw, 7.5rem);
+      line-height: 1.0;
+      color: var(--white);
+      text-shadow:
+        3px 3px 0 var(--navy-mid),
+        0 0 40px var(--sky-a30);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.01em;
     }
+
+    /* Red marquee-border accent around "Redhead Pod" */
+    .hero-title-inner {
+      display: inline-block;
+      border: 3px solid var(--red);
+      outline: 3px solid var(--red-a30);
+      outline-offset: 6px;
+      padding: 0.1em 0.4em;
+      position: relative;
+    }
+    /* Marquee corner circles */
+    .hero-title-inner::before,
+    .hero-title-inner::after {
+      content: '●';
+      position: absolute;
+      top: -0.55em;
+      font-size: 0.22em;
+      color: var(--red);
+      line-height: 1;
+    }
+    .hero-title-inner::before { left:  0.3em; }
+    .hero-title-inner::after  { right: 0.3em; }
 
     .hero-sub {
-      font-family: var(--font-head);
+      font-family: var(--font-body);
       font-style: italic;
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
-      color: var(--grey);
-      margin-bottom: 2rem;
-      letter-spacing: 0.03em;
+      font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+      color: var(--sky-lt);
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
     }
 
+    /* Coming-soon badge: styled like the red marquee sign */
     .coming-soon-badge {
       display: inline-block;
-      border: 1px solid var(--gold);
-      padding: 0.45rem 1.8rem;
-      font-family: var(--font-body);
-      font-size: 0.76rem;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold-lt);
-      margin-bottom: 0.5rem;
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      letter-spacing: 0.18em;
+      padding: 0.5rem 2rem;
       position: relative;
-      overflow: hidden;
-      /* Retro double-border via outline */
-      outline: 1px solid rgba(201,146,42,0.3);
-      outline-offset: 4px;
+      /* Polka-dot border mimicking the marquee sign */
+      border: 2px solid var(--white-a35);
+      box-shadow: 0 4px 20px var(--red-a45), 0 0 0 6px var(--red-a15);
     }
     .coming-soon-badge::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(201,146,42,0.14) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, var(--white-a12) 50%, transparent 100%);
       transform: translateX(-100%);
-      animation: shimmer 3.2s ease-in-out infinite;
+      animation: shimmer 3s ease-in-out infinite;
     }
     @keyframes shimmer {
       0%   { transform: translateX(-100%); }
       60%, 100% { transform: translateX(100%); }
     }
 
-    /* Decorative crescent + small stars flanking the badge */
-    .hero-magic {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-      margin-top: 0.8rem;
-      color: var(--gold);
-      font-size: 1.1rem;
-      opacity: 0.7;
+    /* Arrow accent below badge (like the sign arrow) */
+    .badge-arrow {
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid var(--red);
+      margin: 0 auto;
+      opacity: 0.6;
     }
-    .hero-magic .moon { font-size: 1.3rem; }
 
     .scroll-hint {
       position: absolute;
-      bottom: 2.5rem;
+      bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -252,115 +254,113 @@
       text-transform: uppercase;
       animation: bounce 2.2s ease-in-out infinite;
     }
-    .scroll-hint svg { opacity: 0.55; }
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50%       { transform: translateX(-50%) translateY(8px); }
     }
 
-    /* ── ABOUT ─────────────────────────────────────────────────── */
+    /* ═══════════════════════════════════════════ ABOUT ════════ */
     #about {
-      background: linear-gradient(180deg, var(--midnight) 0%, var(--deep) 100%);
+      background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy) 100%);
+      padding: 5rem 1.5rem;
     }
 
     #about h2 {
-      font-family: var(--font-head);
-      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-      font-weight: 700;
-      color: var(--cream);
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      color: var(--white);
       margin-bottom: 0.3rem;
+      letter-spacing: 0.02em;
     }
-    /* Italic "from the Redhead" sub-heading */
-    #about .section-sub {
-      font-family: var(--font-head);
-      font-style: italic;
-      font-size: clamp(0.9rem, 2vw, 1.05rem);
-      color: var(--crimson-lt);
+
+    .section-sub {
+      font-family: var(--font-acc);
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--sky);
       margin-bottom: 0;
     }
 
     #about p {
       font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: var(--grey);
+      color: var(--sky-lt);
       max-width: 640px;
       margin: 0 auto 1.2rem;
+      opacity: 0.9;
     }
 
-    #about p strong {
-      color: var(--cream);
-      font-weight: 400;
-    }
+    #about p strong { color: var(--white); font-weight: 700; }
 
-    /* ── Pillar cards – retro TV-panel style ───────────────────── */
+    /* Pillar cards: clean retro panels with sky-blue border */
     .pillars {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1.5rem;
       margin-top: 3rem;
     }
 
     .pillar-card {
-      background: rgba(255,255,255,0.03);
-      /* Double-border Bewitched-style frame */
-      border: 1px solid rgba(201,146,42,0.25);
-      outline: 1px solid rgba(201,146,42,0.08);
-      outline-offset: -5px;
-      padding: 2.2rem 1.5rem;
+      background: var(--white-a04);
+      border: 1.5px solid var(--sky-a30);
+      padding: 2.2rem 1.5rem 2rem;
+      text-align: center;
       position: relative;
-      transition: border-color 0.35s, background 0.35s;
+      transition: border-color 0.3s, background 0.3s;
     }
-    .pillar-card::before {
-      content: '✦';
+    /* Corner dots like marquee lights */
+    .pillar-card::before,
+    .pillar-card::after {
+      content: '●';
       position: absolute;
-      top: -0.7rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.85rem;
-      color: var(--gold);
-      background: var(--deep);
-      padding: 0 0.4rem;
+      font-size: 0.5rem;
+      color: var(--red);
+      opacity: 0.7;
+      line-height: 1;
     }
+    .pillar-card::before { top:  0.4rem; left:  0.5rem; }
+    .pillar-card::after  { top:  0.4rem; right: 0.5rem; }
     .pillar-card:hover {
-      background: rgba(201,146,42,0.05);
-      border-color: rgba(201,146,42,0.55);
+      background: var(--sky-a07);
+      border-color: var(--sky-a60);
     }
 
     .pillar-icon {
-      font-size: 2rem;
-      margin-bottom: 0.9rem;
+      font-size: 2.2rem;
       display: block;
+      margin-bottom: 0.9rem;
     }
 
     .pillar-card h3 {
-      font-family: var(--font-head);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--gold-lt);
-      margin-bottom: 0.6rem;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--sky);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
     }
 
     .pillar-card p {
       font-size: 0.9rem;
-      color: var(--grey);
+      color: var(--sky-lt);
       margin: 0;
+      opacity: 0.85;
     }
 
-    /* ── NOTIFY ────────────────────────────────────────────────── */
+    /* ══════════════════════════════════════════ NOTIFY ════════ */
     #notify {
-      background: linear-gradient(180deg, var(--deep) 0%, var(--purple) 50%, var(--deep) 100%);
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+      padding: 5rem 1.5rem;
     }
 
     #notify h2 {
-      font-family: var(--font-head);
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700;
-      color: var(--cream);
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      color: var(--white);
       margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
     }
 
-    #notify p {
+    #notify > .inner > p {
       font-size: clamp(0.92rem, 1.7vw, 1.05rem);
-      color: var(--grey);
+      color: var(--sky-lt);
       margin-bottom: 2rem;
       max-width: 520px;
       margin-left: auto;
@@ -370,42 +370,40 @@
     .notify-form {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0;
       justify-content: center;
       max-width: 500px;
       margin: 0 auto 1.5rem;
+      border: 1.5px solid var(--sky-a40);
     }
 
     .notify-form input[type="email"] {
       flex: 1;
-      min-width: 220px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(201,146,42,0.35);
-      padding: 0.7rem 1.1rem;
+      min-width: 200px;
+      background: var(--white-a06);
+      border: none;
+      padding: 0.75rem 1.2rem;
       font-family: var(--font-body);
-      font-size: 0.9rem;
-      color: var(--cream);
+      font-size: 0.95rem;
+      color: var(--white);
       outline: none;
-      transition: border-color 0.25s;
     }
     .notify-form input[type="email"]::placeholder { color: var(--grey); }
-    .notify-form input[type="email"]:focus { border-color: var(--gold); }
 
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--crimson) 100%);
-      color: var(--cream);
+    .btn-red {
+      background: var(--red);
+      color: var(--white);
       border: none;
-      padding: 0.7rem 1.8rem;
-      font-family: var(--font-body);
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      padding: 0.75rem 1.8rem;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
       cursor: pointer;
-      transition: opacity 0.25s, transform 0.2s;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
     }
-    .btn-gold:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-gold:active { transform: translateY(0); }
+    .btn-red:hover  { background: var(--red-lt); transform: translateY(-1px); }
+    .btn-red:active { transform: translateY(0); }
 
     .form-note {
       font-size: 0.78rem;
@@ -413,11 +411,10 @@
       opacity: 0.7;
     }
 
-    /* ── SOCIAL ────────────────────────────────────────────────── */
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 1.25rem;
+      gap: 1.5rem;
       margin-top: 2.5rem;
       flex-wrap: wrap;
     }
@@ -429,25 +426,32 @@
       color: var(--grey);
       text-decoration: none;
       font-size: 0.82rem;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       border-bottom: 1px solid transparent;
       transition: color 0.25s, border-color 0.25s;
       padding-bottom: 2px;
     }
     .social-link:hover {
-      color: var(--gold-lt);
-      border-color: var(--gold-lt);
+      color: var(--sky);
+      border-color: var(--sky);
     }
 
-    /* ── FOOTER ────────────────────────────────────────────────── */
+    /* ════════════════════════════════════════════ FOOTER ═════ */
     footer {
-      position: relative;
-      z-index: 1;
-      background: var(--midnight);
-      border-top: 1px solid rgba(201,146,42,0.12);
+      background: var(--navy-darkest);
+      border-top: 2px solid var(--red);
       padding: 2.5rem 1.5rem;
       text-align: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--white);
+      display: block;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.04em;
     }
 
     footer p {
@@ -456,107 +460,45 @@
       opacity: 0.6;
     }
 
-    footer .brand-mark {
-      font-family: var(--font-acc);
-      font-size: 1.3rem;
-      color: var(--gold);
-      opacity: 0.85;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
     /* ── Accessibility ─────────────────────────────────────────── */
-    :focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
-    }
+    :focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
 
-    /* ── Screen-reader only ────────────────────────────────────── */
     .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
+      position: absolute; width: 1px; height: 1px; padding: 0;
+      margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border-width: 0;
     }
   </style>
 </head>
 <body>
 
-  <!-- Twinkling star + crescent background -->
+  <!-- Hand-drawn atomic-star background (matches the illustration) -->
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
 
-  <!-- ═══════════════════════════════════ HERO ══ -->
+  <!-- ══════════════════════════════════════════════ HERO ══════ -->
   <section id="hero">
-    <div class="inner">
 
-      <!-- Logo: Stacy's brand portrait with Bewitched starburst frame -->
-      <div class="logo-wrap" role="img" aria-label="Stacy Cashmore – the Redhead in a Swing Dress">
-        <!-- Outer atomic starburst ring (SVG) -->
-        <svg class="burst-ring" viewBox="0 0 216 216" fill="none" aria-hidden="true">
-          <g stroke="rgba(201,146,42,0.45)" stroke-width="1">
-            <!-- 16-point starburst -->
-            <line x1="108" y1="0"   x2="108" y2="216"/>
-            <line x1="0"   y1="108" x2="216" y2="108"/>
-            <line x1="15"  y1="15"  x2="201" y2="201"/>
-            <line x1="201" y1="15"  x2="15"  y2="201"/>
-            <line x1="0"   y1="59"  x2="216" y2="157"/>
-            <line x1="0"   y1="157" x2="216" y2="59"/>
-            <line x1="59"  y1="0"   x2="157" y2="216"/>
-            <line x1="157" y1="0"   x2="59"  y2="216"/>
-          </g>
-          <!-- Diamond dots at ray tips -->
-          <g fill="rgba(228,184,74,0.6)">
-            <polygon points="108,3 110,8 108,13 106,8"/>
-            <polygon points="108,203 110,208 108,213 106,208"/>
-            <polygon points="3,108 8,110 13,108 8,106"/>
-            <polygon points="203,108 208,110 213,108 208,106"/>
-            <polygon points="18,18 22,18 22,22 18,22"/>
-            <polygon points="194,18 198,18 198,22 194,22"/>
-            <polygon points="18,194 22,194 22,198 18,198"/>
-            <polygon points="194,194 198,194 198,198 194,198"/>
-          </g>
-          <!-- Dotted circle -->
-          <circle cx="108" cy="108" r="104" stroke="rgba(201,146,42,0.2)" stroke-width="0.8" stroke-dasharray="3 6"/>
-        </svg>
+    <!-- Brand illustration — full-width banner -->
+    <img
+      class="hero-banner"
+      src="SC-Youtube-header.png"
+      alt="Stacy Cashmore – the Redhead in a Swing Dress – leaning on a sky-blue classic car beneath a starry night sky next to a retro Stacy Clouds marquee sign"
+      width="1456"
+      height="816"
+    />
 
-        <!-- Inner smaller burst (counter-spins) -->
-        <svg class="burst-ring-inner" viewBox="0 0 196 196" fill="none" aria-hidden="true">
-          <g stroke="rgba(168,34,60,0.35)" stroke-width="0.8">
-            <line x1="98" y1="0"   x2="98" y2="196"/>
-            <line x1="0"  y1="98"  x2="196" y2="98"/>
-            <line x1="14" y1="14"  x2="182" y2="182"/>
-            <line x1="182" y1="14" x2="14"  y2="182"/>
-          </g>
-          <circle cx="98" cy="98" r="94" stroke="rgba(168,34,60,0.18)" stroke-width="0.6" stroke-dasharray="2 8"/>
-        </svg>
-
-        <img
-          class="logo-portrait"
-          id="logo-portrait"
-          alt="Stacy Cashmore – the Redhead in a Swing Dress, host of Redhead Pod"
-          width="180"
-          height="180"
-          loading="eager"
-        />
-      </div>
-
+    <div class="hero-text">
       <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
-      <h1 class="hero-title">Redhead Pod</h1>
-      <p class="hero-tag">a podcast with a touch of magic</p>
-      <p class="hero-sub">Tech, life, and everything that brings you joy</p>
+      <h1 class="hero-title">
+        <span class="hero-title-inner">Redhead Pod</span>
+      </h1>
+      <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
       <span class="coming-soon-badge">Coming Soon</span>
-      <div class="hero-magic" aria-hidden="true">
-        <span>✦</span><span class="moon">☽</span><span>✦</span>
-      </div>
+      <span class="badge-arrow" aria-hidden="true"></span>
     </div>
 
     <div class="scroll-hint" aria-hidden="true">
@@ -567,30 +509,18 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════ ABOUT ══ -->
+  <!-- ════════════════════════════════════════════ ABOUT ═══════ -->
   <section id="about">
     <div class="inner">
+
       <h2>What is Redhead Pod?</h2>
       <p class="section-sub">a little bit of magic, a lot of conversation</p>
 
-      <!-- Atomic-age starburst divider -->
-      <div class="divider" aria-hidden="true">
-        <span class="divider-line"></span>
-        <svg class="divider-burst" viewBox="0 0 36 36" fill="none">
-          <g stroke="rgba(201,146,42,0.7)" stroke-width="0.9">
-            <line x1="18" y1="0"  x2="18" y2="36"/>
-            <line x1="0"  y1="18" x2="36" y2="18"/>
-            <line x1="5"  y1="5"  x2="31" y2="31"/>
-            <line x1="31" y1="5"  x2="5"  y2="31"/>
-            <line x1="0"  y1="11" x2="36" y2="25"/>
-            <line x1="0"  y1="25" x2="36" y2="11"/>
-            <line x1="11" y1="0"  x2="25" y2="36"/>
-            <line x1="25" y1="0"  x2="11" y2="36"/>
-          </g>
-          <circle cx="18" cy="18" r="5" fill="rgba(201,146,42,0.15)" stroke="rgba(201,146,42,0.6)" stroke-width="1"/>
-          <circle cx="18" cy="18" r="2" fill="rgba(228,184,74,0.8)"/>
-        </svg>
-        <span class="divider-line"></span>
+      <!-- Marquee-dot divider -->
+      <div class="marquee-divider" aria-hidden="true">
+        <span class="line"></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span class="line"></span>
       </div>
 
       <p>
@@ -622,28 +552,16 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════ NOTIFY ══ -->
+  <!-- ══════════════════════════════════════════ NOTIFY ════════ -->
   <section id="notify">
     <div class="inner">
+
       <h2>Be the first to know</h2>
 
-      <div class="divider" aria-hidden="true">
-        <span class="divider-line"></span>
-        <svg class="divider-burst" viewBox="0 0 36 36" fill="none">
-          <g stroke="rgba(201,146,42,0.7)" stroke-width="0.9">
-            <line x1="18" y1="0"  x2="18" y2="36"/>
-            <line x1="0"  y1="18" x2="36" y2="18"/>
-            <line x1="5"  y1="5"  x2="31" y2="31"/>
-            <line x1="31" y1="5"  x2="5"  y2="31"/>
-            <line x1="0"  y1="11" x2="36" y2="25"/>
-            <line x1="0"  y1="25" x2="36" y2="11"/>
-            <line x1="11" y1="0"  x2="25" y2="36"/>
-            <line x1="25" y1="0"  x2="11" y2="36"/>
-          </g>
-          <circle cx="18" cy="18" r="5" fill="rgba(201,146,42,0.15)" stroke="rgba(201,146,42,0.6)" stroke-width="1"/>
-          <circle cx="18" cy="18" r="2" fill="rgba(228,184,74,0.8)"/>
-        </svg>
-        <span class="divider-line"></span>
+      <div class="marquee-divider" aria-hidden="true">
+        <span class="line"></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span class="line"></span>
       </div>
 
       <p>Drop your email and we'll let you know the moment the first episode drops.</p>
@@ -658,7 +576,7 @@
           required
           autocomplete="email"
         />
-        <button type="submit" class="btn-gold">Notify me</button>
+        <button type="submit" class="btn-red">Notify me</button>
       </form>
       <p class="form-note">No spam. Unsubscribe any time.</p>
 
@@ -675,33 +593,25 @@
     </div>
   </section>
 
-  <!-- ════════════════════════════════ FOOTER ══ -->
+  <!-- ════════════════════════════════════════════ FOOTER ══════ -->
   <footer>
-    <span class="brand-mark">Redhead Pod</span>
+    <span class="footer-brand">Redhead Pod</span>
     <p>&copy; <span id="yr"></span> Stacy Cashmore. All rights reserved.</p>
   </footer>
 
-  <!-- ── Scripts ─────────────────────────────────────────────── -->
+  <!-- ── Scripts ──────────────────────────────────────────────── -->
   <script>
-    /* Dynamic year */
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    /* Brand logo – GitHub avatar for Stacy Cashmore (u/33732891) */
-    const LOGO_URL = 'https://avatars.githubusercontent.com/u/33732891';
-    document.getElementById('logo-portrait').src = LOGO_URL;
-
-    /* Background colour that matches --midnight, used for crescent cutout */
-    const BG_COLOUR = 'rgb(13,11,20)';
-
-    /* ── Twinkling stars + crescent moons canvas ───────────────── */
+    /* ── Hand-drawn atomic stars (matching the illustration style) ─
+       The illustration uses simple '+' / snowflake shapes:
+       a central dot + short radiating lines + tiny end-circles     */
     (function () {
       const canvas = document.getElementById('stars-canvas');
       const ctx    = canvas.getContext('2d');
       let   stars  = [];
-      let   moons  = [];
 
-      const STAR_COUNT  = 200;
-      const MOON_COUNT  = 5;
+      const COUNT = 160;
 
       function resize() {
         canvas.width  = window.innerWidth;
@@ -710,111 +620,89 @@
 
       function rand(min, max) { return Math.random() * (max - min) + min; }
 
-      function initParticles() {
+      function initStars() {
         stars = [];
-        moons = [];
-
-        /* Stars: classic twinkle points */
-        for (let i = 0; i < STAR_COUNT; i++) {
+        for (let i = 0; i < COUNT; i++) {
+          /* Mix of simple + cross marks and 6-arm snowflake shapes
+             (just like the hand-drawn ones in the illustration)     */
+          const type = Math.random() < 0.35 ? 'snowflake' : 'cross';
           stars.push({
             x:     rand(0, canvas.width),
             y:     rand(0, canvas.height),
-            r:     rand(0.4, 1.8),
-            speed: rand(0.003, 0.013),
+            size:  rand(4, type === 'snowflake' ? 14 : 8),
+            type,
+            speed: rand(0.002, 0.008),
             phase: rand(0, Math.PI * 2),
           });
         }
-
-        /* Crescent moons: small decorative arcs floating slowly */
-        for (let i = 0; i < MOON_COUNT; i++) {
-          moons.push({
-            x:     rand(50, canvas.width  - 50),
-            y:     rand(50, canvas.height - 50),
-            size:  rand(14, 28),
-            vx:    rand(-0.08, 0.08),
-            vy:    rand(-0.06, 0.06),
-            angle: rand(0, Math.PI * 2),
-            alpha: rand(0.08, 0.18),
-          });
-        }
       }
 
-      /* Draw a crescent: full disc minus offset disc */
-      function drawCrescent(x, y, size, angle, alpha) {
+      /* Simple hand-drawn + cross */
+      function drawCross(x, y, size, alpha) {
         ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(angle);
         ctx.globalAlpha = alpha;
-        ctx.fillStyle = 'rgba(228,184,74,1)';
+        ctx.strokeStyle = 'rgba(255,255,255,1)';
+        ctx.lineWidth   = Math.max(0.8, size * 0.12);
+        ctx.lineCap     = 'round';
         ctx.beginPath();
-        ctx.arc(0, 0, size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = BG_COLOUR;
-        ctx.beginPath();
-        ctx.arc(size * 0.45, 0, size * 0.78, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.globalAlpha = 1;
+        ctx.moveTo(x - size, y); ctx.lineTo(x + size, y);
+        ctx.moveTo(x, y - size); ctx.lineTo(x, y + size);
+        ctx.stroke();
         ctx.restore();
       }
 
-      /* Draw a 4-point sparkle */
-      function drawSparkle(x, y, r, alpha) {
+      /* 6-arm snowflake like the bigger ones in the illustration */
+      function drawSnowflake(x, y, size, alpha) {
         ctx.save();
         ctx.globalAlpha = alpha;
-        ctx.fillStyle = 'rgba(228,184,74,1)';
+        ctx.strokeStyle = 'rgba(255,255,255,1)';
+        ctx.lineWidth   = Math.max(0.8, size * 0.09);
+        ctx.lineCap     = 'round';
+        const arms = 6;
+        for (let i = 0; i < arms; i++) {
+          const angle = (Math.PI * 2 / arms) * i;
+          const ex = x + Math.cos(angle) * size;
+          const ey = y + Math.sin(angle) * size;
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.lineTo(ex, ey);
+          ctx.stroke();
+          /* Small circle at tip */
+          ctx.beginPath();
+          ctx.arc(ex, ey, size * 0.1, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,1)';
+          ctx.fill();
+        }
+        /* Centre dot */
         ctx.beginPath();
-        const s = r * 2.4;
-        ctx.moveTo(x,     y - s);
-        ctx.quadraticCurveTo(x + r * 0.3, y - r * 0.3, x + s, y);
-        ctx.quadraticCurveTo(x + r * 0.3, y + r * 0.3, x,     y + s);
-        ctx.quadraticCurveTo(x - r * 0.3, y + r * 0.3, x - s, y);
-        ctx.quadraticCurveTo(x - r * 0.3, y - r * 0.3, x,     y - s);
+        ctx.arc(x, y, size * 0.12, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,1)';
         ctx.fill();
-        ctx.globalAlpha = 1;
         ctx.restore();
       }
 
       function draw(t) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        /* Twinkling stars */
         for (const s of stars) {
-          const a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
-          /* Alternate between simple dots and 4-point sparkles */
-          if (s.r > 1.3) {
-            drawSparkle(s.x, s.y, s.r * 0.7, a * 0.75);
+          const a = 0.15 + 0.55 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+          if (s.type === 'snowflake') {
+            drawSnowflake(s.x, s.y, s.size, a);
           } else {
-            ctx.beginPath();
-            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(228,184,74,${(a * 0.8).toFixed(3)})`;
-            ctx.fill();
+            drawCross(s.x, s.y, s.size, a);
           }
         }
-
-        /* Floating crescent moons */
-        for (const m of moons) {
-          drawCrescent(m.x, m.y, m.size, m.angle, m.alpha);
-          m.x += m.vx;
-          m.y += m.vy;
-          /* Wrap at edges */
-          if (m.x < -50) m.x = canvas.width  + 50;
-          if (m.x > canvas.width  + 50) m.x = -50;
-          if (m.y < -50) m.y = canvas.height + 50;
-          if (m.y > canvas.height + 50) m.y = -50;
-        }
-
         requestAnimationFrame(draw);
       }
 
       resize();
-      initParticles();
-      window.addEventListener('resize', () => { resize(); initParticles(); });
+      initStars();
+      window.addEventListener('resize', () => { resize(); initStars(); });
 
       const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (!mq.matches) requestAnimationFrame(draw);
     }());
 
-    /* ── Notify form: placeholder submit UX ─────────────────────── */
+    /* ── Email form placeholder UX ────────────────────────────── */
     document.querySelector('.notify-form').addEventListener('submit', function (e) {
       e.preventDefault();
       const input = this.querySelector('input[type="email"]');
