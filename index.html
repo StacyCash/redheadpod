@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<!-- Palette and feel taken directly from SC-Youtube-header.png:
+     pale ice-blue sky · deep indigo night-sky · soft lavender ground · sky-blue convertible -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redhead Pod – Coming Soon</title>
+  <meta name="description" content="Redhead Pod – from Stacy Cashmore, the Redhead in a Swing Dress. Where tech, life, and joy meet. Coming soon." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Colour tokens — all sourced from SC-Youtube-header.png ── */
+    :root {
+      /* From the illustration's sky */
+      --sky:          #cce6f2;
+      --sky-mid:      #7ec8de;
+      --sky-dark:     #4ea8cc;
+
+      /* From the illustration's night-sky burst */
+      --indigo:       #2a2d80;
+      --indigo-lt:    #3d41a0;
+      --indigo-dim:   #1e2060;
+
+      /* From the illustration's ground hill */
+      --lavender:     #d0d4ee;
+      --lavender-lt:  #eef0f8;
+
+      /* From the marquee sign (used very sparingly) */
+      --sign-red:     #c8312a;
+
+      /* Neutrals */
+      --white:        #ffffff;
+      --near-white:   #f8fbfd;
+      --ink:          #1a1c4a;
+      --grey:         #6a78a0;
+
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lato', 'Helvetica Neue', sans-serif;
+      --font-acc:  'Dancing Script', cursive;
+    }
+
+    /* ── Reset ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      /* Page background matches the illustration's pale sky —
+         so the illustration blends seamlessly into the page */
+      background: var(--sky);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Sections ─────────────────────────────────────────────── */
+    .inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+
+    /* ── Thin decorative divider ──────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem auto;
+      max-width: 360px;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--sky-mid), transparent);
+    }
+    /* Tiny atomic star — nods to the illustration */
+    .divider-star {
+      font-size: 0.85rem;
+      color: var(--sky-mid);
+      opacity: 0.8;
+    }
+
+    /* ════════════════════════════════════ HERO ════════════════ */
+    #hero {
+      position: relative;
+      /* Height = natural image aspect ratio (2550×1440 ≈ 56.5%)
+         capped so it doesn't go too tall on wide screens           */
+      width: 100%;
+    }
+
+    /* The brand illustration — full width, no cropping, no dark bg */
+    .hero-banner {
+      display: block;
+      width: 100%;
+      height: auto;
+      /* Fade the very bottom edge into the sky background */
+      mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    }
+
+    /* Title block sits directly under the illustration,
+       on the same sky-blue background so it reads as one canvas   */
+    .hero-text {
+      padding: 0 1.5rem 5rem;
+      text-align: center;
+      /* Overlap slightly upward so the lavender ground in the image
+         transitions into the sky-coloured area here               */
+      margin-top: -4vw;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-acc);
+      font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+      color: var(--indigo);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      opacity: 0.85;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      line-height: 1.0;
+      color: var(--indigo-dim);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-sub {
+      font-family: var(--font-head);
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      color: var(--indigo);
+      opacity: 0.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* "Coming Soon" — echoes the sign in the illustration.
+       Small, contained, the only red element on the page.          */
+    .coming-soon-badge {
+      display: inline-block;
+      border: 2px solid var(--sign-red);
+      color: var(--sign-red);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.45rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .coming-soon-badge::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(200,49,42,0.08), transparent);
+      transform: translateX(-100%);
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%        { transform: translateX(-100%); }
+      60%, 100% { transform: translateX(100%); }
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--indigo);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      animation: bounce 2.4s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ══════════════════════════════════ ABOUT ════════════════ */
+    #about {
+      background: var(--white);
+      padding: 5rem 1.5rem;
+    }
+
+    #about h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--indigo-dim);
+      margin-bottom: 0.3rem;
+    }
+
+    .section-sub {
+      font-family: var(--font-acc);
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--sky-dark);
+      margin-bottom: 0;
+    }
+
+    #about > .inner > p {
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: var(--grey);
+      max-width: 640px;
+      margin: 0 auto 1.2rem;
+    }
+
+    #about > .inner > p strong { color: var(--ink); font-weight: 700; }
+
+    /* Pillar cards — white with a soft sky-blue border, clean */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .pillar-card {
+      background: var(--near-white);
+      border: 1px solid var(--lavender);
+      padding: 2.2rem 1.5rem 2rem;
+      text-align: center;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .pillar-card:hover {
+      border-color: var(--sky-mid);
+      box-shadow: 0 4px 20px rgba(126,200,222,0.18);
+    }
+
+    .pillar-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.9rem;
+    }
+
+    .pillar-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-card p {
+      font-size: 0.9rem;
+      color: var(--grey);
+      margin: 0;
+    }
+
+    /* ════════════════════════════════ NOTIFY ═════════════════ */
+    #notify {
+      /* Soft lavender — same hue as the ground hill in the illustration */
+      background: var(--lavender-lt);
+      padding: 5rem 1.5rem;
+    }
+
+    #notify h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--indigo-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    #notify > .inner > p {
+      font-size: clamp(0.92rem, 1.7vw, 1.05rem);
+      color: var(--grey);
+      margin-bottom: 2rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* YouTube subscribe button */
+    .btn-youtube {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--sign-red);
+      color: var(--white);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      padding: 0.8rem 2rem;
+      margin-bottom: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-youtube:hover  { background: #a82520; transform: translateY(-1px); }
+    .btn-youtube:active { transform: translateY(0); }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s, border-color 0.25s;
+      padding-bottom: 2px;
+    }
+    .social-link:hover {
+      color: var(--sky-dark);
+      border-color: var(--sky-dark);
+    }
+
+    /* ══════════════════════════════════ FOOTER ═══════════════ */
+    /* Deep indigo — the colour of the night-sky burst in the illustration */
+    footer {
+      background: var(--indigo-dim);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-acc);
+      font-size: 1.5rem;
+      color: var(--sky);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--lavender);
+      opacity: 0.6;
+    }
+
+    /* ── Accessibility ─────────────────────────────────────────── */
+    :focus-visible { outline: 2px solid var(--sky-mid); outline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0;
+      margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border-width: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════ HERO ══════════ -->
+  <section id="hero">
+
+    <!-- Brand illustration — fills the full width, no dark overlay -->
+    <img
+      class="hero-banner"
+      src="SC-Youtube-header.png"
+      alt="Stacy Cashmore – the Redhead in a Swing Dress – beside her sky-blue convertible next to the Stacy Clouds marquee sign"
+      width="2550"
+      height="1440"
+    />
+
+    <!-- Title lives on the same sky-blue background as the illustration -->
+    <div class="hero-text">
+      <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
+      <h1 class="hero-title">Redhead Pod</h1>
+      <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
+      <span class="coming-soon-badge">Coming Soon</span>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ ABOUT ═══════════ -->
+  <section id="about">
+    <div class="inner">
+
+      <h2>What is Redhead Pod?</h2>
+      <p class="section-sub">a little bit of magic, a lot of conversation</p>
+
+      <div class="divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-star">✦</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <p>
+        Redhead Pod is a podcast hosted by <strong>Stacy Cashmore</strong> — Tech Explorer
+        DevOps, conference speaker, and the Redhead in a Swing Dress — where members
+        of the developer community sit down to talk about
+        <strong>tech, life, and what brings them joy</strong>.
+      </p>
+      <p>
+        Expect honest conversations, a little wit, and the occasional bit of magic.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar-card">
+          <span class="pillar-icon" aria-hidden="true">🎙️</span>
+          <h3>Authentic voices</h3>
+          <p>Real conversations with real developers — no scripts, no filter.</p>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-icon" aria-hidden="true">✨</span>
+          <h3>Beyond the code</h3>
+          <p>Tech is more than algorithms. We talk life, passion, and purpose too.</p>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-icon" aria-hidden="true">💛</span>
+          <h3>Community first</h3>
+          <p>Celebrating the people who make the developer world a better place.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ SUBSCRIBE ═══════════ -->
+  <section id="notify">
+    <div class="inner">
+
+      <h2>Never miss an episode</h2>
+
+      <div class="divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-star">✦</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <p>Subscribe on YouTube to get notified the moment each new episode drops.</p>
+
+      <a
+        href="https://www.youtube.com/@StacyClouds"
+        class="btn-youtube"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Subscribe to StacyClouds on YouTube"
+      >
+        <!-- YouTube play icon -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        Subscribe on YouTube
+      </a>
+
+      <div class="social-links">
+        <a href="https://bsky.app/profile/stacy-clouds.net" class="social-link" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+          Bluesky
+        </a>
+        <a href="https://stacy-clouds.net" class="social-link" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          stacy&#8209;clouds.net
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ FOOTER ══════════ -->
+  <!-- Deep indigo — the night-sky burst colour from the illustration -->
+  <footer>
+    <span class="footer-brand">Redhead Pod</span>
+    <p>&copy; <span id="yr"></span> Stacy Cashmore. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
