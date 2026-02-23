@@ -6,7 +6,7 @@
   <title>Redhead Pod – Coming Soon</title>
   <meta name="description" content="Redhead Pod – from Stacy Cashmore, the Redhead in a Swing Dress. Where tech, life, and joy meet. Coming soon." />
 
-  <!-- Fonts -->
+  <!-- Fonts: Playfair Display (headings) · Josefin Sans (body) · Dancing Script (accent) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Josefin+Sans:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
@@ -41,7 +41,7 @@
       overflow-x: hidden;
     }
 
-    /* ── Star canvas ───────────────────────────────────────────── */
+    /* ── Star canvas (fixed background) ───────────────────────── */
     #stars-canvas {
       position: fixed;
       inset: 0;
@@ -64,28 +64,33 @@
       text-align: center;
     }
 
-    /* ── Decorative divider ────────────────────────────────────── */
+    /* ── Bewitched starburst divider ───────────────────────────── */
     .divider {
       display: flex;
       align-items: center;
       gap: 1rem;
       margin: 2.5rem auto;
-      max-width: 400px;
+      max-width: 480px;
     }
-    .divider span {
+    .divider-line {
       flex: 1;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
-    .divider-star {
-      font-size: 1.1rem;
-      color: var(--gold);
-      animation: pulse 2.8s ease-in-out infinite;
+    /* Atomic-age starburst motif */
+    .divider-burst {
+      position: relative;
+      width: 2.2rem;
+      height: 2.2rem;
+      flex-shrink: 0;
+      animation: spin-slow 18s linear infinite;
     }
-
+    @keyframes spin-slow {
+      to { transform: rotate(360deg); }
+    }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.55; transform: scale(1.25); }
+      50%       { opacity: 0.55; transform: scale(1.2); }
     }
 
     /* ── HERO ──────────────────────────────────────────────────── */
@@ -95,66 +100,142 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(ellipse at 60% 20%, #2b1050 0%, var(--midnight) 70%);
+      background: radial-gradient(ellipse at 55% 30%, #2e1158 0%, #180c30 45%, var(--midnight) 80%);
     }
 
+    /* ── Logo portrait ─────────────────────────────────────────── */
+    .logo-wrap {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Outer spinning starburst ring */
+    .logo-wrap .burst-ring {
+      position: absolute;
+      inset: -18px;
+      animation: spin-slow 22s linear infinite;
+    }
+
+    /* Inner slow counter-spin */
+    .logo-wrap .burst-ring-inner {
+      position: absolute;
+      inset: -8px;
+      animation: spin-slow 14s linear infinite reverse;
+      opacity: 0.6;
+    }
+
+    .logo-portrait {
+      position: relative;
+      z-index: 2;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      box-shadow:
+        0 0 0 6px rgba(201,146,42,0.15),
+        0 0 40px rgba(201,146,42,0.25),
+        0 0 80px rgba(168,34,60,0.2);
+    }
+
+    /* Magic sparkle on portrait */
+    .logo-wrap::after {
+      content: '✦';
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      z-index: 3;
+      font-size: 1.4rem;
+      color: var(--gold-lt);
+      animation: pulse 2.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px var(--gold));
+    }
+
+    /* ── Hero text ─────────────────────────────────────────────── */
     .hero-eyebrow {
       font-family: var(--font-acc);
       font-size: clamp(1.1rem, 2.5vw, 1.6rem);
       color: var(--gold-lt);
       letter-spacing: 0.04em;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
     }
 
     .hero-title {
       font-family: var(--font-head);
-      font-size: clamp(3.2rem, 10vw, 7.5rem);
+      font-size: clamp(3.4rem, 10vw, 7.8rem);
       font-weight: 700;
-      line-height: 1.05;
+      line-height: 1.0;
       letter-spacing: -0.01em;
       background: linear-gradient(135deg, var(--cream) 10%, var(--gold-lt) 50%, var(--crimson-lt) 90%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Bewitched-style italic flourish subtitle */
+    .hero-tag {
+      font-family: var(--font-head);
+      font-style: italic;
+      font-size: clamp(1.0rem, 2.3vw, 1.35rem);
+      color: var(--crimson-lt);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
     }
 
     .hero-sub {
       font-family: var(--font-head);
       font-style: italic;
-      font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
       color: var(--grey);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       letter-spacing: 0.03em;
     }
 
     .coming-soon-badge {
       display: inline-block;
       border: 1px solid var(--gold);
-      border-radius: 2px;
-      padding: 0.45rem 1.6rem;
+      padding: 0.45rem 1.8rem;
       font-family: var(--font-body);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 600;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold-lt);
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.5rem;
       position: relative;
       overflow: hidden;
+      /* Retro double-border via outline */
+      outline: 1px solid rgba(201,146,42,0.3);
+      outline-offset: 4px;
     }
     .coming-soon-badge::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(201,146,42,0.12) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(201,146,42,0.14) 50%, transparent 100%);
       transform: translateX(-100%);
-      animation: shimmer 3s ease-in-out infinite;
+      animation: shimmer 3.2s ease-in-out infinite;
     }
     @keyframes shimmer {
       0%   { transform: translateX(-100%); }
       60%, 100% { transform: translateX(100%); }
     }
+
+    /* Decorative crescent + small stars flanking the badge */
+    .hero-magic {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      color: var(--gold);
+      font-size: 1.1rem;
+      opacity: 0.7;
+    }
+    .hero-magic .moon { font-size: 1.3rem; }
 
     .scroll-hint {
       position: absolute;
@@ -166,12 +247,12 @@
       align-items: center;
       gap: 0.4rem;
       color: var(--grey);
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       animation: bounce 2.2s ease-in-out infinite;
     }
-    .scroll-hint svg { opacity: 0.6; }
+    .scroll-hint svg { opacity: 0.55; }
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50%       { transform: translateX(-50%) translateY(8px); }
@@ -187,7 +268,15 @@
       font-size: clamp(1.8rem, 4.5vw, 2.8rem);
       font-weight: 700;
       color: var(--cream);
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+    /* Italic "from the Redhead" sub-heading */
+    #about .section-sub {
+      font-family: var(--font-head);
+      font-style: italic;
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      color: var(--crimson-lt);
+      margin-bottom: 0;
     }
 
     #about p {
@@ -202,7 +291,7 @@
       font-weight: 400;
     }
 
-    /* ── STYLE CARDS ───────────────────────────────────────────── */
+    /* ── Pillar cards – retro TV-panel style ───────────────────── */
     .pillars {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -212,14 +301,28 @@
 
     .pillar-card {
       background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(201,146,42,0.2);
-      border-radius: 4px;
-      padding: 2rem 1.5rem;
+      /* Double-border Bewitched-style frame */
+      border: 1px solid rgba(201,146,42,0.25);
+      outline: 1px solid rgba(201,146,42,0.08);
+      outline-offset: -5px;
+      padding: 2.2rem 1.5rem;
+      position: relative;
       transition: border-color 0.35s, background 0.35s;
     }
+    .pillar-card::before {
+      content: '✦';
+      position: absolute;
+      top: -0.7rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.85rem;
+      color: var(--gold);
+      background: var(--deep);
+      padding: 0 0.4rem;
+    }
     .pillar-card:hover {
-      background: rgba(201,146,42,0.06);
-      border-color: rgba(201,146,42,0.5);
+      background: rgba(201,146,42,0.05);
+      border-color: rgba(201,146,42,0.55);
     }
 
     .pillar-icon {
@@ -278,7 +381,6 @@
       min-width: 220px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(201,146,42,0.35);
-      border-radius: 2px;
       padding: 0.7rem 1.1rem;
       font-family: var(--font-body);
       font-size: 0.9rem;
@@ -293,7 +395,6 @@
       background: linear-gradient(135deg, var(--gold) 0%, var(--crimson) 100%);
       color: var(--cream);
       border: none;
-      border-radius: 2px;
       padding: 0.7rem 1.8rem;
       font-family: var(--font-body);
       font-size: 0.82rem;
@@ -357,9 +458,9 @@
 
     footer .brand-mark {
       font-family: var(--font-acc);
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--gold);
-      opacity: 0.8;
+      opacity: 0.85;
       display: block;
       margin-bottom: 0.5rem;
     }
@@ -390,16 +491,72 @@
 </head>
 <body>
 
-  <!-- Twinkling star background -->
+  <!-- Twinkling star + crescent background -->
   <canvas id="stars-canvas" aria-hidden="true"></canvas>
 
   <!-- ═══════════════════════════════════ HERO ══ -->
   <section id="hero">
     <div class="inner">
+
+      <!-- Logo: Stacy's brand portrait with Bewitched starburst frame -->
+      <div class="logo-wrap" role="img" aria-label="Stacy Cashmore – the Redhead in a Swing Dress">
+        <!-- Outer atomic starburst ring (SVG) -->
+        <svg class="burst-ring" viewBox="0 0 216 216" fill="none" aria-hidden="true">
+          <g stroke="rgba(201,146,42,0.45)" stroke-width="1">
+            <!-- 16-point starburst -->
+            <line x1="108" y1="0"   x2="108" y2="216"/>
+            <line x1="0"   y1="108" x2="216" y2="108"/>
+            <line x1="15"  y1="15"  x2="201" y2="201"/>
+            <line x1="201" y1="15"  x2="15"  y2="201"/>
+            <line x1="0"   y1="59"  x2="216" y2="157"/>
+            <line x1="0"   y1="157" x2="216" y2="59"/>
+            <line x1="59"  y1="0"   x2="157" y2="216"/>
+            <line x1="157" y1="0"   x2="59"  y2="216"/>
+          </g>
+          <!-- Diamond dots at ray tips -->
+          <g fill="rgba(228,184,74,0.6)">
+            <polygon points="108,3 110,8 108,13 106,8"/>
+            <polygon points="108,203 110,208 108,213 106,208"/>
+            <polygon points="3,108 8,110 13,108 8,106"/>
+            <polygon points="203,108 208,110 213,108 208,106"/>
+            <polygon points="18,18 22,18 22,22 18,22"/>
+            <polygon points="194,18 198,18 198,22 194,22"/>
+            <polygon points="18,194 22,194 22,198 18,198"/>
+            <polygon points="194,194 198,194 198,198 194,198"/>
+          </g>
+          <!-- Dotted circle -->
+          <circle cx="108" cy="108" r="104" stroke="rgba(201,146,42,0.2)" stroke-width="0.8" stroke-dasharray="3 6"/>
+        </svg>
+
+        <!-- Inner smaller burst (counter-spins) -->
+        <svg class="burst-ring-inner" viewBox="0 0 196 196" fill="none" aria-hidden="true">
+          <g stroke="rgba(168,34,60,0.35)" stroke-width="0.8">
+            <line x1="98" y1="0"   x2="98" y2="196"/>
+            <line x1="0"  y1="98"  x2="196" y2="98"/>
+            <line x1="14" y1="14"  x2="182" y2="182"/>
+            <line x1="182" y1="14" x2="14"  y2="182"/>
+          </g>
+          <circle cx="98" cy="98" r="94" stroke="rgba(168,34,60,0.18)" stroke-width="0.6" stroke-dasharray="2 8"/>
+        </svg>
+
+        <img
+          class="logo-portrait"
+          id="logo-portrait"
+          alt="Stacy Cashmore – the Redhead in a Swing Dress, host of Redhead Pod"
+          width="180"
+          height="180"
+          loading="eager"
+        />
+      </div>
+
       <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
       <h1 class="hero-title">Redhead Pod</h1>
+      <p class="hero-tag">a podcast with a touch of magic</p>
       <p class="hero-sub">Tech, life, and everything that brings you joy</p>
       <span class="coming-soon-badge">Coming Soon</span>
+      <div class="hero-magic" aria-hidden="true">
+        <span>✦</span><span class="moon">☽</span><span>✦</span>
+      </div>
     </div>
 
     <div class="scroll-hint" aria-hidden="true">
@@ -414,9 +571,26 @@
   <section id="about">
     <div class="inner">
       <h2>What is Redhead Pod?</h2>
+      <p class="section-sub">a little bit of magic, a lot of conversation</p>
 
+      <!-- Atomic-age starburst divider -->
       <div class="divider" aria-hidden="true">
-        <span></span><span class="divider-star">✦</span><span></span>
+        <span class="divider-line"></span>
+        <svg class="divider-burst" viewBox="0 0 36 36" fill="none">
+          <g stroke="rgba(201,146,42,0.7)" stroke-width="0.9">
+            <line x1="18" y1="0"  x2="18" y2="36"/>
+            <line x1="0"  y1="18" x2="36" y2="18"/>
+            <line x1="5"  y1="5"  x2="31" y2="31"/>
+            <line x1="31" y1="5"  x2="5"  y2="31"/>
+            <line x1="0"  y1="11" x2="36" y2="25"/>
+            <line x1="0"  y1="25" x2="36" y2="11"/>
+            <line x1="11" y1="0"  x2="25" y2="36"/>
+            <line x1="25" y1="0"  x2="11" y2="36"/>
+          </g>
+          <circle cx="18" cy="18" r="5" fill="rgba(201,146,42,0.15)" stroke="rgba(201,146,42,0.6)" stroke-width="1"/>
+          <circle cx="18" cy="18" r="2" fill="rgba(228,184,74,0.8)"/>
+        </svg>
+        <span class="divider-line"></span>
       </div>
 
       <p>
@@ -454,7 +628,22 @@
       <h2>Be the first to know</h2>
 
       <div class="divider" aria-hidden="true">
-        <span></span><span class="divider-star">✦</span><span></span>
+        <span class="divider-line"></span>
+        <svg class="divider-burst" viewBox="0 0 36 36" fill="none">
+          <g stroke="rgba(201,146,42,0.7)" stroke-width="0.9">
+            <line x1="18" y1="0"  x2="18" y2="36"/>
+            <line x1="0"  y1="18" x2="36" y2="18"/>
+            <line x1="5"  y1="5"  x2="31" y2="31"/>
+            <line x1="31" y1="5"  x2="5"  y2="31"/>
+            <line x1="0"  y1="11" x2="36" y2="25"/>
+            <line x1="0"  y1="25" x2="36" y2="11"/>
+            <line x1="11" y1="0"  x2="25" y2="36"/>
+            <line x1="25" y1="0"  x2="11" y2="36"/>
+          </g>
+          <circle cx="18" cy="18" r="5" fill="rgba(201,146,42,0.15)" stroke="rgba(201,146,42,0.6)" stroke-width="1"/>
+          <circle cx="18" cy="18" r="2" fill="rgba(228,184,74,0.8)"/>
+        </svg>
+        <span class="divider-line"></span>
       </div>
 
       <p>Drop your email and we'll let you know the moment the first episode drops.</p>
@@ -497,12 +686,22 @@
     /* Dynamic year */
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    /* ── Twinkling stars ────────────────────────────────────────── */
+    /* Brand logo – GitHub avatar for Stacy Cashmore (u/33732891) */
+    const LOGO_URL = 'https://avatars.githubusercontent.com/u/33732891';
+    document.getElementById('logo-portrait').src = LOGO_URL;
+
+    /* Background colour that matches --midnight, used for crescent cutout */
+    const BG_COLOUR = 'rgb(13,11,20)';
+
+    /* ── Twinkling stars + crescent moons canvas ───────────────── */
     (function () {
-      const canvas  = document.getElementById('stars-canvas');
-      const ctx     = canvas.getContext('2d');
-      let   stars   = [];
-      const COUNT   = 180;
+      const canvas = document.getElementById('stars-canvas');
+      const ctx    = canvas.getContext('2d');
+      let   stars  = [];
+      let   moons  = [];
+
+      const STAR_COUNT  = 200;
+      const MOON_COUNT  = 5;
 
       function resize() {
         canvas.width  = window.innerWidth;
@@ -511,42 +710,111 @@
 
       function rand(min, max) { return Math.random() * (max - min) + min; }
 
-      function initStars() {
+      function initParticles() {
         stars = [];
-        for (let i = 0; i < COUNT; i++) {
+        moons = [];
+
+        /* Stars: classic twinkle points */
+        for (let i = 0; i < STAR_COUNT; i++) {
           stars.push({
-            x:      rand(0, canvas.width),
-            y:      rand(0, canvas.height),
-            r:      rand(0.4, 1.6),
-            alpha:  rand(0.2, 1),
-            speed:  rand(0.003, 0.012),
-            phase:  rand(0, Math.PI * 2),
+            x:     rand(0, canvas.width),
+            y:     rand(0, canvas.height),
+            r:     rand(0.4, 1.8),
+            speed: rand(0.003, 0.013),
+            phase: rand(0, Math.PI * 2),
+          });
+        }
+
+        /* Crescent moons: small decorative arcs floating slowly */
+        for (let i = 0; i < MOON_COUNT; i++) {
+          moons.push({
+            x:     rand(50, canvas.width  - 50),
+            y:     rand(50, canvas.height - 50),
+            size:  rand(14, 28),
+            vx:    rand(-0.08, 0.08),
+            vy:    rand(-0.06, 0.06),
+            angle: rand(0, Math.PI * 2),
+            alpha: rand(0.08, 0.18),
           });
         }
       }
 
+      /* Draw a crescent: full disc minus offset disc */
+      function drawCrescent(x, y, size, angle, alpha) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = 'rgba(228,184,74,1)';
+        ctx.beginPath();
+        ctx.arc(0, 0, size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = BG_COLOUR;
+        ctx.beginPath();
+        ctx.arc(size * 0.45, 0, size * 0.78, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.restore();
+      }
+
+      /* Draw a 4-point sparkle */
+      function drawSparkle(x, y, r, alpha) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = 'rgba(228,184,74,1)';
+        ctx.beginPath();
+        const s = r * 2.4;
+        ctx.moveTo(x,     y - s);
+        ctx.quadraticCurveTo(x + r * 0.3, y - r * 0.3, x + s, y);
+        ctx.quadraticCurveTo(x + r * 0.3, y + r * 0.3, x,     y + s);
+        ctx.quadraticCurveTo(x - r * 0.3, y + r * 0.3, x - s, y);
+        ctx.quadraticCurveTo(x - r * 0.3, y - r * 0.3, x,     y - s);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.restore();
+      }
+
       function draw(t) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        /* Twinkling stars */
         for (const s of stars) {
           const a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(228,184,74,${(a * 0.8).toFixed(3)})`;
-          ctx.fill();
+          /* Alternate between simple dots and 4-point sparkles */
+          if (s.r > 1.3) {
+            drawSparkle(s.x, s.y, s.r * 0.7, a * 0.75);
+          } else {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(228,184,74,${(a * 0.8).toFixed(3)})`;
+            ctx.fill();
+          }
         }
+
+        /* Floating crescent moons */
+        for (const m of moons) {
+          drawCrescent(m.x, m.y, m.size, m.angle, m.alpha);
+          m.x += m.vx;
+          m.y += m.vy;
+          /* Wrap at edges */
+          if (m.x < -50) m.x = canvas.width  + 50;
+          if (m.x > canvas.width  + 50) m.x = -50;
+          if (m.y < -50) m.y = canvas.height + 50;
+          if (m.y > canvas.height + 50) m.y = -50;
+        }
+
         requestAnimationFrame(draw);
       }
 
       resize();
-      initStars();
-      window.addEventListener('resize', () => { resize(); initStars(); });
+      initParticles();
+      window.addEventListener('resize', () => { resize(); initParticles(); });
 
-      /* Respect reduced-motion preference */
       const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (!mq.matches) requestAnimationFrame(draw);
     }());
 
-    /* ── Prevent default form submit (placeholder UX) ───────────── */
+    /* ── Notify form: placeholder submit UX ─────────────────────── */
     document.querySelector('.notify-form').addEventListener('submit', function (e) {
       e.preventDefault();
       const input = this.querySelector('input[type="email"]');
