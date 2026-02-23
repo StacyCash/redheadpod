@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redhead Pod – Coming Soon</title>
+  <meta name="description" content="Redhead Pod – from Stacy Cashmore, the Redhead in a Swing Dress. Where tech, life, and joy meet. Coming soon." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Josefin+Sans:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --midnight:  #0d0b14;
+      --deep:      #140f22;
+      --purple:    #1e1332;
+      --gold:      #c9922a;
+      --gold-lt:   #e4b84a;
+      --crimson:   #a8223c;
+      --crimson-lt:#d63354;
+      --cream:     #f0e6d0;
+      --grey:      #9a8ea8;
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Josefin Sans', sans-serif;
+      --font-acc:  'Dancing Script', cursive;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--midnight);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Star canvas ───────────────────────────────────────────── */
+    #stars-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Section base ──────────────────────────────────────────── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 1.5rem;
+    }
+
+    .inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* ── Decorative divider ────────────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem auto;
+      max-width: 400px;
+    }
+    .divider span {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .divider-star {
+      font-size: 1.1rem;
+      color: var(--gold);
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.55; transform: scale(1.25); }
+    }
+
+    /* ── HERO ──────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(ellipse at 60% 20%, #2b1050 0%, var(--midnight) 70%);
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-acc);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--gold-lt);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(3.2rem, 10vw, 7.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      background: linear-gradient(135deg, var(--cream) 10%, var(--gold-lt) 50%, var(--crimson-lt) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-sub {
+      font-family: var(--font-head);
+      font-style: italic;
+      font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+      color: var(--grey);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .coming-soon-badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      padding: 0.45rem 1.6rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .coming-soon-badge::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(201,146,42,0.12) 50%, transparent 100%);
+      transform: translateX(-100%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%   { transform: translateX(-100%); }
+      60%, 100% { transform: translateX(100%); }
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--grey);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      animation: bounce 2.2s ease-in-out infinite;
+    }
+    .scroll-hint svg { opacity: 0.6; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────────────── */
+    #about {
+      background: linear-gradient(180deg, var(--midnight) 0%, var(--deep) 100%);
+    }
+
+    #about h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    #about p {
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: var(--grey);
+      max-width: 640px;
+      margin: 0 auto 1.2rem;
+    }
+
+    #about p strong {
+      color: var(--cream);
+      font-weight: 400;
+    }
+
+    /* ── STYLE CARDS ───────────────────────────────────────────── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .pillar-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,146,42,0.2);
+      border-radius: 4px;
+      padding: 2rem 1.5rem;
+      transition: border-color 0.35s, background 0.35s;
+    }
+    .pillar-card:hover {
+      background: rgba(201,146,42,0.06);
+      border-color: rgba(201,146,42,0.5);
+    }
+
+    .pillar-icon {
+      font-size: 2rem;
+      margin-bottom: 0.9rem;
+      display: block;
+    }
+
+    .pillar-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      margin-bottom: 0.6rem;
+    }
+
+    .pillar-card p {
+      font-size: 0.9rem;
+      color: var(--grey);
+      margin: 0;
+    }
+
+    /* ── NOTIFY ────────────────────────────────────────────────── */
+    #notify {
+      background: linear-gradient(180deg, var(--deep) 0%, var(--purple) 50%, var(--deep) 100%);
+    }
+
+    #notify h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+
+    #notify p {
+      font-size: clamp(0.92rem, 1.7vw, 1.05rem);
+      color: var(--grey);
+      margin-bottom: 2rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .notify-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .notify-form input[type="email"] {
+      flex: 1;
+      min-width: 220px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,146,42,0.35);
+      border-radius: 2px;
+      padding: 0.7rem 1.1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.25s;
+    }
+    .notify-form input[type="email"]::placeholder { color: var(--grey); }
+    .notify-form input[type="email"]:focus { border-color: var(--gold); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--crimson) 100%);
+      color: var(--cream);
+      border: none;
+      border-radius: 2px;
+      padding: 0.7rem 1.8rem;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.25s, transform 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-gold:active { transform: translateY(0); }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--grey);
+      opacity: 0.7;
+    }
+
+    /* ── SOCIAL ────────────────────────────────────────────────── */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s, border-color 0.25s;
+      padding-bottom: 2px;
+    }
+    .social-link:hover {
+      color: var(--gold-lt);
+      border-color: var(--gold-lt);
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: var(--midnight);
+      border-top: 1px solid rgba(201,146,42,0.12);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--grey);
+      opacity: 0.6;
+    }
+
+    footer .brand-mark {
+      font-family: var(--font-acc);
+      font-size: 1.2rem;
+      color: var(--gold);
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Accessibility ─────────────────────────────────────────── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ── Screen-reader only ────────────────────────────────────── */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Twinkling star background -->
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <!-- ═══════════════════════════════════ HERO ══ -->
+  <section id="hero">
+    <div class="inner">
+      <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
+      <h1 class="hero-title">Redhead Pod</h1>
+      <p class="hero-sub">Tech, life, and everything that brings you joy</p>
+      <span class="coming-soon-badge">Coming Soon</span>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ ABOUT ══ -->
+  <section id="about">
+    <div class="inner">
+      <h2>What is Redhead Pod?</h2>
+
+      <div class="divider" aria-hidden="true">
+        <span></span><span class="divider-star">✦</span><span></span>
+      </div>
+
+      <p>
+        Redhead Pod is a podcast hosted by <strong>Stacy Cashmore</strong> — developer advocate,
+        conference speaker, and the Redhead in a Swing Dress — where members of the
+        developer community sit down to talk about <strong>tech, life, and what brings them joy</strong>.
+      </p>
+      <p>
+        Expect honest conversations, a little wit, and the occasional bit of magic.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar-card">
+          <span class="pillar-icon" aria-hidden="true">🎙️</span>
+          <h3>Authentic voices</h3>
+          <p>Real conversations with real developers — no scripts, no filter.</p>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-icon" aria-hidden="true">✨</span>
+          <h3>Beyond the code</h3>
+          <p>Tech is more than algorithms. We talk life, passion, and purpose too.</p>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-icon" aria-hidden="true">💛</span>
+          <h3>Community first</h3>
+          <p>Celebrating the people who make the developer world a better place.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ NOTIFY ══ -->
+  <section id="notify">
+    <div class="inner">
+      <h2>Be the first to know</h2>
+
+      <div class="divider" aria-hidden="true">
+        <span></span><span class="divider-star">✦</span><span></span>
+      </div>
+
+      <p>Drop your email and we'll let you know the moment the first episode drops.</p>
+
+      <form class="notify-form" action="#" method="post" aria-label="Email notification sign-up">
+        <label for="email" class="sr-only">Email address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          autocomplete="email"
+        />
+        <button type="submit" class="btn-gold">Notify me</button>
+      </form>
+      <p class="form-note">No spam. Unsubscribe any time.</p>
+
+      <div class="social-links">
+        <a href="https://bsky.app/profile/stacy-clouds.net" class="social-link" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
+          Bluesky
+        </a>
+        <a href="https://stacy-clouds.net" class="social-link" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          stacy&#8209;clouds.net
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ FOOTER ══ -->
+  <footer>
+    <span class="brand-mark">Redhead Pod</span>
+    <p>&copy; <span id="yr"></span> Stacy Cashmore. All rights reserved.</p>
+  </footer>
+
+  <!-- ── Scripts ─────────────────────────────────────────────── -->
+  <script>
+    /* Dynamic year */
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    /* ── Twinkling stars ────────────────────────────────────────── */
+    (function () {
+      const canvas  = document.getElementById('stars-canvas');
+      const ctx     = canvas.getContext('2d');
+      let   stars   = [];
+      const COUNT   = 180;
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function rand(min, max) { return Math.random() * (max - min) + min; }
+
+      function initStars() {
+        stars = [];
+        for (let i = 0; i < COUNT; i++) {
+          stars.push({
+            x:      rand(0, canvas.width),
+            y:      rand(0, canvas.height),
+            r:      rand(0.4, 1.6),
+            alpha:  rand(0.2, 1),
+            speed:  rand(0.003, 0.012),
+            phase:  rand(0, Math.PI * 2),
+          });
+        }
+      }
+
+      function draw(t) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const s of stars) {
+          const a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(228,184,74,${(a * 0.8).toFixed(3)})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      initStars();
+      window.addEventListener('resize', () => { resize(); initStars(); });
+
+      /* Respect reduced-motion preference */
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!mq.matches) requestAnimationFrame(draw);
+    }());
+
+    /* ── Prevent default form submit (placeholder UX) ───────────── */
+    document.querySelector('.notify-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const input = this.querySelector('input[type="email"]');
+      const btn   = this.querySelector('button');
+      btn.textContent = '✓ You\'re on the list!';
+      btn.disabled    = true;
+      input.disabled  = true;
+    });
+  </script>
+
+</body>
+</html>
