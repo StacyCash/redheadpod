@@ -288,50 +288,24 @@
       margin-right: auto;
     }
 
-    /* Single-line pill form */
-    .notify-form {
-      display: flex;
-      flex-wrap: wrap;
-      max-width: 480px;
-      margin: 0 auto 1.5rem;
-      border: 1px solid var(--sky-mid);
-      background: var(--white);
-    }
-
-    .notify-form input[type="email"] {
-      flex: 1;
-      min-width: 200px;
-      background: transparent;
-      border: none;
-      padding: 0.75rem 1.2rem;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      color: var(--ink);
-      outline: none;
-    }
-    .notify-form input[type="email"]::placeholder { color: var(--grey); opacity: 0.7; }
-
-    .btn-sky {
-      background: var(--sky-mid);
-      color: var(--indigo-dim);
-      border: none;
-      padding: 0.75rem 1.8rem;
+    /* YouTube subscribe button */
+    .btn-youtube {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--sign-red);
+      color: var(--white);
+      text-decoration: none;
       font-family: var(--font-body);
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      cursor: pointer;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      padding: 0.8rem 2rem;
+      margin-bottom: 0.5rem;
       transition: background 0.2s, transform 0.15s;
-      white-space: nowrap;
     }
-    .btn-sky:hover  { background: var(--sky-dark); transform: translateY(-1px); }
-    .btn-sky:active { transform: translateY(0); }
-
-    .form-note {
-      font-size: 0.78rem;
-      color: var(--grey);
-      opacity: 0.7;
-    }
+    .btn-youtube:hover  { background: #a82520; transform: translateY(-1px); }
+    .btn-youtube:active { transform: translateY(0); }
 
     .social-links {
       display: flex;
@@ -439,8 +413,8 @@
       </div>
 
       <p>
-        Redhead Pod is a podcast hosted by <strong>Stacy Cashmore</strong> — developer
-        advocate, conference speaker, and the Redhead in a Swing Dress — where members
+        Redhead Pod is a podcast hosted by <strong>Stacy Cashmore</strong> — Tech Explorer
+        DevOps, conference speaker, and the Redhead in a Swing Dress — where members
         of the developer community sit down to talk about
         <strong>tech, life, and what brings them joy</strong>.
       </p>
@@ -468,11 +442,11 @@
     </div>
   </section>
 
-  <!-- ════════════════════════════════════ NOTIFY ═══════════ -->
+  <!-- ════════════════════════════════════ SUBSCRIBE ═══════════ -->
   <section id="notify">
     <div class="inner">
 
-      <h2>Be the first to know</h2>
+      <h2>Never miss an episode</h2>
 
       <div class="divider" aria-hidden="true">
         <span class="divider-line"></span>
@@ -480,21 +454,21 @@
         <span class="divider-line"></span>
       </div>
 
-      <p>Drop your email and we'll let you know the moment the first episode drops.</p>
+      <p>Subscribe on YouTube to get notified the moment each new episode drops.</p>
 
-      <form class="notify-form" action="#" method="post" aria-label="Email notification sign-up">
-        <label for="email" class="sr-only">Email address</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="your@email.com"
-          required
-          autocomplete="email"
-        />
-        <button type="submit" class="btn-sky">Notify me</button>
-      </form>
-      <p class="form-note">No spam. Unsubscribe any time.</p>
+      <a
+        href="https://www.youtube.com/@StacyClouds"
+        class="btn-youtube"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Subscribe to StacyClouds on YouTube"
+      >
+        <!-- YouTube play icon -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        Subscribe on YouTube
+      </a>
 
       <div class="social-links">
         <a href="https://bsky.app/profile/stacy-clouds.net" class="social-link" target="_blank" rel="noopener noreferrer">
@@ -518,15 +492,6 @@
 
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
-
-    document.querySelector('.notify-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const input = this.querySelector('input[type="email"]');
-      const btn   = this.querySelector('button');
-      btn.textContent = '✓ You\'re on the list!';
-      btn.disabled    = true;
-      input.disabled  = true;
-    });
   </script>
 
 </body>
