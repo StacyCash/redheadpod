@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- Designed around SC-Youtube-header.png:
-     deep navy night sky · sky blue · red marquee · white · hand-drawn atomic stars -->
+<!-- Palette and feel taken directly from SC-Youtube-header.png:
+     pale ice-blue sky · deep indigo night-sky · soft lavender ground · sky-blue convertible -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,42 +8,40 @@
   <title>Redhead Pod – Coming Soon</title>
   <meta name="description" content="Redhead Pod – from Stacy Cashmore, the Redhead in a Swing Dress. Where tech, life, and joy meet. Coming soon." />
 
-  <!-- Fonts:
-       Fredoka One  – chunky retro display (marquee-sign feel)
-       Lato         – clean modern body
-       Dancing Script – handwritten accent -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Brand colour tokens (from the illustration) ──────────── */
+    /* ── Colour tokens — all sourced from SC-Youtube-header.png ── */
     :root {
-      --navy:         #0e1545;   /* deep night-sky blue */
-      --navy-mid:     #1a2370;   /* mid-navy for sections */
-      --navy-deep:    #0a0e30;   /* deeper navy (notify section end) */
-      --navy-darkest: #070b22;   /* footer background */
-      --sky:          #7ab8d4;   /* classic convertible / sky accent */
-      --sky-lt:       #b8dde8;   /* light sky / cloud edge */
-      --sky-a30:      rgba(122,184,212,0.3);  /* sky at 30% opacity */
-      --sky-a40:      rgba(122,184,212,0.4);  /* sky at 40% opacity */
-      --sky-a60:      rgba(122,184,212,0.6);  /* sky at 60% opacity */
-      --sky-a07:      rgba(122,184,212,0.07); /* sky at 7% opacity */
-      --red:          #cc2222;   /* marquee sign red */
-      --red-lt:       #e84040;   /* hover / lighter red */
-      --red-a30:      rgba(204,34,34,0.3);    /* red at 30% opacity */
-      --red-a45:      rgba(204,34,34,0.45);   /* red at 45% opacity */
-      --red-a15:      rgba(204,34,34,0.15);   /* red at 15% opacity */
-      --white:        #ffffff;
-      --white-a04:    rgba(255,255,255,0.04); /* white at 4% opacity */
-      --white-a06:    rgba(255,255,255,0.06); /* white at 6% opacity */
-      --white-a35:    rgba(255,255,255,0.35); /* white at 35% opacity */
-      --white-a12:    rgba(255,255,255,0.12); /* white at 12% opacity */
-      --grey:         #8daab8;
+      /* From the illustration's sky */
+      --sky:          #cce6f2;
+      --sky-mid:      #7ec8de;
+      --sky-dark:     #4ea8cc;
 
-      --font-display: 'Fredoka One', 'Arial Rounded MT Bold', sans-serif;
-      --font-body:    'Lato', sans-serif;
-      --font-acc:     'Dancing Script', cursive;
+      /* From the illustration's night-sky burst */
+      --indigo:       #2a2d80;
+      --indigo-lt:    #3d41a0;
+      --indigo-dim:   #1e2060;
+
+      /* From the illustration's ground hill */
+      --lavender:     #d0d4ee;
+      --lavender-lt:  #eef0f8;
+
+      /* From the marquee sign (used very sparingly) */
+      --sign-red:     #c8312a;
+
+      /* Neutrals */
+      --white:        #ffffff;
+      --near-white:   #f8fbfd;
+      --ink:          #1a1c4a;
+      --grey:         #6a78a0;
+
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lato', 'Helvetica Neue', sans-serif;
+      --font-acc:  'Dancing Script', cursive;
     }
 
     /* ── Reset ────────────────────────────────────────────────── */
@@ -52,245 +50,181 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--navy);
-      color: var(--white);
+      /* Page background matches the illustration's pale sky —
+         so the illustration blends seamlessly into the page */
+      background: var(--sky);
+      color: var(--ink);
       font-family: var(--font-body);
       font-weight: 300;
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* ── Star canvas (hand-drawn atomic style, fixed layer) ───── */
-    #stars-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
     /* ── Sections ─────────────────────────────────────────────── */
-    section, footer {
-      position: relative;
-      z-index: 1;
-    }
-
     .inner {
-      max-width: 900px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 0 1.5rem;
       text-align: center;
     }
 
-    /* ── Section divider: retro marquee-dots row ──────────────── */
-    .marquee-divider {
+    /* ── Thin decorative divider ──────────────────────────────── */
+    .divider {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
+      gap: 1rem;
       margin: 2rem auto;
-      padding: 0 1.5rem;
+      max-width: 360px;
     }
-    .marquee-divider span {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--red);
-      opacity: 0.7;
-      animation: dot-pulse 1.8s ease-in-out infinite;
-    }
-    .marquee-divider span:nth-child(2) { animation-delay: 0.2s; }
-    .marquee-divider span:nth-child(3) { animation-delay: 0.4s; }
-    .marquee-divider span:nth-child(4) { animation-delay: 0.6s; }
-    .marquee-divider span:nth-child(5) { animation-delay: 0.8s; }
-    .marquee-divider span:nth-child(6) { animation-delay: 1.0s; }
-    .marquee-divider span:nth-child(7) { animation-delay: 1.2s; }
-    @keyframes dot-pulse {
-      0%, 100% { opacity: 0.35; transform: scale(0.85); }
-      50%       { opacity: 1;    transform: scale(1.15); }
-    }
-    .marquee-divider .line {
+    .divider-line {
       flex: 1;
-      max-width: 80px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--sky), transparent);
-      border-radius: 0;
-      animation: none;
-      width: auto;
+      background: linear-gradient(90deg, transparent, var(--sky-mid), transparent);
+    }
+    /* Tiny atomic star — nods to the illustration */
+    .divider-star {
+      font-size: 0.85rem;
+      color: var(--sky-mid);
+      opacity: 0.8;
     }
 
-    /* ════════════════════════════════════════════ HERO ════════ */
+    /* ════════════════════════════════════ HERO ════════════════ */
     #hero {
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
-      padding-bottom: 4rem;
-    }
-
-    /* The brand illustration banner */
-    .hero-banner {
+      position: relative;
+      /* Height = natural image aspect ratio (2550×1440 ≈ 56.5%)
+         capped so it doesn't go too tall on wide screens           */
       width: 100%;
-      max-width: 100%;
-      display: block;
-      /* Image has a white/sky bottom — blend into navy with a bottom gradient mask */
-      mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
     }
 
-    /* Text block sitting below the illustration */
+    /* The brand illustration — full width, no cropping, no dark bg */
+    .hero-banner {
+      display: block;
+      width: 100%;
+      height: auto;
+      /* Fade the very bottom edge into the sky background */
+      mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    }
+
+    /* Title block sits directly under the illustration,
+       on the same sky-blue background so it reads as one canvas   */
     .hero-text {
-      padding: 0 1.5rem;
+      padding: 0 1.5rem 5rem;
       text-align: center;
-      margin-top: -2rem; /* pull up under the fading illustration edge */
+      /* Overlap slightly upward so the lavender ground in the image
+         transitions into the sky-coloured area here               */
+      margin-top: -4vw;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-eyebrow {
       font-family: var(--font-acc);
-      font-size: clamp(1.1rem, 2.6vw, 1.55rem);
-      color: var(--sky);
-      letter-spacing: 0.04em;
-      margin-bottom: 0.4rem;
+      font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+      color: var(--indigo);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      opacity: 0.85;
     }
 
-    /* Marquee-sign style title */
     .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 11vw, 7.5rem);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: clamp(3rem, 9vw, 6.5rem);
       line-height: 1.0;
-      color: var(--white);
-      text-shadow:
-        3px 3px 0 var(--navy-mid),
-        0 0 40px var(--sky-a30);
+      color: var(--indigo-dim);
+      letter-spacing: -0.01em;
       margin-bottom: 0.6rem;
-      letter-spacing: 0.01em;
     }
-
-    /* Red marquee-border accent around "Redhead Pod" */
-    .hero-title-inner {
-      display: inline-block;
-      border: 3px solid var(--red);
-      outline: 3px solid var(--red-a30);
-      outline-offset: 6px;
-      padding: 0.1em 0.4em;
-      position: relative;
-    }
-    /* Marquee corner circles */
-    .hero-title-inner::before,
-    .hero-title-inner::after {
-      content: '●';
-      position: absolute;
-      top: -0.55em;
-      font-size: 0.22em;
-      color: var(--red);
-      line-height: 1;
-    }
-    .hero-title-inner::before { left:  0.3em; }
-    .hero-title-inner::after  { right: 0.3em; }
 
     .hero-sub {
-      font-family: var(--font-body);
+      font-family: var(--font-head);
       font-style: italic;
-      font-size: clamp(0.95rem, 2.2vw, 1.2rem);
-      color: var(--sky-lt);
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      color: var(--indigo);
+      opacity: 0.7;
       margin-bottom: 2.5rem;
-      opacity: 0.9;
     }
 
-    /* Coming-soon badge: styled like the red marquee sign */
+    /* "Coming Soon" — echoes the sign in the illustration.
+       Small, contained, the only red element on the page.          */
     .coming-soon-badge {
       display: inline-block;
-      background: var(--red);
-      color: var(--white);
-      font-family: var(--font-display);
-      font-size: clamp(0.85rem, 2vw, 1.05rem);
-      letter-spacing: 0.18em;
-      padding: 0.5rem 2rem;
+      border: 2px solid var(--sign-red);
+      color: var(--sign-red);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.45rem 1.8rem;
       position: relative;
-      /* Polka-dot border mimicking the marquee sign */
-      border: 2px solid var(--white-a35);
-      box-shadow: 0 4px 20px var(--red-a45), 0 0 0 6px var(--red-a15);
+      overflow: hidden;
     }
     .coming-soon-badge::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, transparent 0%, var(--white-a12) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent, rgba(200,49,42,0.08), transparent);
       transform: translateX(-100%);
-      animation: shimmer 3s ease-in-out infinite;
+      animation: shimmer 3.5s ease-in-out infinite;
     }
     @keyframes shimmer {
-      0%   { transform: translateX(-100%); }
+      0%        { transform: translateX(-100%); }
       60%, 100% { transform: translateX(100%); }
-    }
-
-    /* Arrow accent below badge (like the sign arrow) */
-    .badge-arrow {
-      display: block;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 10px solid var(--red);
-      margin: 0 auto;
-      opacity: 0.6;
     }
 
     .scroll-hint {
       position: absolute;
-      bottom: 2rem;
+      bottom: 1.5rem;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.4rem;
-      color: var(--grey);
-      font-size: 0.7rem;
+      color: var(--indigo);
+      font-size: 0.68rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      animation: bounce 2.2s ease-in-out infinite;
+      opacity: 0.45;
+      animation: bounce 2.4s ease-in-out infinite;
     }
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(8px); }
+      50%       { transform: translateX(-50%) translateY(7px); }
     }
 
-    /* ═══════════════════════════════════════════ ABOUT ════════ */
+    /* ══════════════════════════════════ ABOUT ════════════════ */
     #about {
-      background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy) 100%);
+      background: var(--white);
       padding: 5rem 1.5rem;
     }
 
     #about h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4.5vw, 3rem);
-      color: var(--white);
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--indigo-dim);
       margin-bottom: 0.3rem;
-      letter-spacing: 0.02em;
     }
 
     .section-sub {
       font-family: var(--font-acc);
       font-size: clamp(0.95rem, 2vw, 1.15rem);
-      color: var(--sky);
+      color: var(--sky-dark);
       margin-bottom: 0;
     }
 
-    #about p {
+    #about > .inner > p {
       font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: var(--sky-lt);
+      color: var(--grey);
       max-width: 640px;
       margin: 0 auto 1.2rem;
-      opacity: 0.9;
     }
 
-    #about p strong { color: var(--white); font-weight: 700; }
+    #about > .inner > p strong { color: var(--ink); font-weight: 700; }
 
-    /* Pillar cards: clean retro panels with sky-blue border */
+    /* Pillar cards — white with a soft sky-blue border, clean */
     .pillars {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -299,111 +233,99 @@
     }
 
     .pillar-card {
-      background: var(--white-a04);
-      border: 1.5px solid var(--sky-a30);
+      background: var(--near-white);
+      border: 1px solid var(--lavender);
       padding: 2.2rem 1.5rem 2rem;
       text-align: center;
-      position: relative;
-      transition: border-color 0.3s, background 0.3s;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
-    /* Corner dots like marquee lights */
-    .pillar-card::before,
-    .pillar-card::after {
-      content: '●';
-      position: absolute;
-      font-size: 0.5rem;
-      color: var(--red);
-      opacity: 0.7;
-      line-height: 1;
-    }
-    .pillar-card::before { top:  0.4rem; left:  0.5rem; }
-    .pillar-card::after  { top:  0.4rem; right: 0.5rem; }
     .pillar-card:hover {
-      background: var(--sky-a07);
-      border-color: var(--sky-a60);
+      border-color: var(--sky-mid);
+      box-shadow: 0 4px 20px rgba(126,200,222,0.18);
     }
 
     .pillar-icon {
-      font-size: 2.2rem;
+      font-size: 2rem;
       display: block;
       margin-bottom: 0.9rem;
     }
 
     .pillar-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      color: var(--sky);
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--indigo);
       margin-bottom: 0.5rem;
-      letter-spacing: 0.02em;
     }
 
     .pillar-card p {
       font-size: 0.9rem;
-      color: var(--sky-lt);
+      color: var(--grey);
       margin: 0;
-      opacity: 0.85;
     }
 
-    /* ══════════════════════════════════════════ NOTIFY ════════ */
+    /* ════════════════════════════════ NOTIFY ═════════════════ */
     #notify {
-      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+      /* Soft lavender — same hue as the ground hill in the illustration */
+      background: var(--lavender-lt);
       padding: 5rem 1.5rem;
     }
 
     #notify h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.6rem, 4vw, 2.6rem);
-      color: var(--white);
+      font-family: var(--font-head);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--indigo-dim);
       margin-bottom: 0.75rem;
-      letter-spacing: 0.02em;
     }
 
     #notify > .inner > p {
       font-size: clamp(0.92rem, 1.7vw, 1.05rem);
-      color: var(--sky-lt);
+      color: var(--grey);
       margin-bottom: 2rem;
       max-width: 520px;
       margin-left: auto;
       margin-right: auto;
     }
 
+    /* Single-line pill form */
     .notify-form {
       display: flex;
       flex-wrap: wrap;
-      gap: 0;
-      justify-content: center;
-      max-width: 500px;
+      max-width: 480px;
       margin: 0 auto 1.5rem;
-      border: 1.5px solid var(--sky-a40);
+      border: 1px solid var(--sky-mid);
+      background: var(--white);
     }
 
     .notify-form input[type="email"] {
       flex: 1;
       min-width: 200px;
-      background: var(--white-a06);
+      background: transparent;
       border: none;
       padding: 0.75rem 1.2rem;
       font-family: var(--font-body);
       font-size: 0.95rem;
-      color: var(--white);
+      color: var(--ink);
       outline: none;
     }
-    .notify-form input[type="email"]::placeholder { color: var(--grey); }
+    .notify-form input[type="email"]::placeholder { color: var(--grey); opacity: 0.7; }
 
-    .btn-red {
-      background: var(--red);
-      color: var(--white);
+    .btn-sky {
+      background: var(--sky-mid);
+      color: var(--indigo-dim);
       border: none;
       padding: 0.75rem 1.8rem;
-      font-family: var(--font-display);
-      font-size: 0.9rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.85rem;
       letter-spacing: 0.1em;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
       white-space: nowrap;
     }
-    .btn-red:hover  { background: var(--red-lt); transform: translateY(-1px); }
-    .btn-red:active { transform: translateY(0); }
+    .btn-sky:hover  { background: var(--sky-dark); transform: translateY(-1px); }
+    .btn-sky:active { transform: translateY(0); }
 
     .form-note {
       font-size: 0.78rem;
@@ -433,35 +355,34 @@
       padding-bottom: 2px;
     }
     .social-link:hover {
-      color: var(--sky);
-      border-color: var(--sky);
+      color: var(--sky-dark);
+      border-color: var(--sky-dark);
     }
 
-    /* ════════════════════════════════════════════ FOOTER ═════ */
+    /* ══════════════════════════════════ FOOTER ═══════════════ */
+    /* Deep indigo — the colour of the night-sky burst in the illustration */
     footer {
-      background: var(--navy-darkest);
-      border-top: 2px solid var(--red);
-      padding: 2.5rem 1.5rem;
+      background: var(--indigo-dim);
+      padding: 3rem 1.5rem;
       text-align: center;
     }
 
     .footer-brand {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--white);
+      font-family: var(--font-acc);
+      font-size: 1.5rem;
+      color: var(--sky);
       display: block;
-      margin-bottom: 0.4rem;
-      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
     }
 
     footer p {
       font-size: 0.8rem;
-      color: var(--grey);
+      color: var(--lavender);
       opacity: 0.6;
     }
 
     /* ── Accessibility ─────────────────────────────────────────── */
-    :focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+    :focus-visible { outline: 2px solid var(--sky-mid); outline-offset: 3px; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -476,57 +397,52 @@
 </head>
 <body>
 
-  <!-- Hand-drawn atomic-star background (matches the illustration) -->
-  <canvas id="stars-canvas" aria-hidden="true"></canvas>
-
-  <!-- ══════════════════════════════════════════════ HERO ══════ -->
+  <!-- ════════════════════════════════════════ HERO ══════════ -->
   <section id="hero">
 
-    <!-- Brand illustration — full-width banner -->
+    <!-- Brand illustration — fills the full width, no dark overlay -->
     <img
       class="hero-banner"
       src="SC-Youtube-header.png"
-      alt="Stacy Cashmore – the Redhead in a Swing Dress – leaning on a sky-blue classic car beneath a starry night sky next to a retro Stacy Clouds marquee sign"
-      width="1456"
-      height="816"
+      alt="Stacy Cashmore – the Redhead in a Swing Dress – beside her sky-blue convertible next to the Stacy Clouds marquee sign"
+      width="2550"
+      height="1440"
     />
 
+    <!-- Title lives on the same sky-blue background as the illustration -->
     <div class="hero-text">
       <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
-      <h1 class="hero-title">
-        <span class="hero-title-inner">Redhead Pod</span>
-      </h1>
+      <h1 class="hero-title">Redhead Pod</h1>
       <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
       <span class="coming-soon-badge">Coming Soon</span>
-      <span class="badge-arrow" aria-hidden="true"></span>
     </div>
 
     <div class="scroll-hint" aria-hidden="true">
       <span>Scroll</span>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
         <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════════ ABOUT ═══════ -->
+  <!-- ══════════════════════════════════════ ABOUT ═══════════ -->
   <section id="about">
     <div class="inner">
 
       <h2>What is Redhead Pod?</h2>
       <p class="section-sub">a little bit of magic, a lot of conversation</p>
 
-      <!-- Marquee-dot divider -->
-      <div class="marquee-divider" aria-hidden="true">
-        <span class="line"></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-        <span class="line"></span>
+      <div class="divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-star">✦</span>
+        <span class="divider-line"></span>
       </div>
 
       <p>
-        Redhead Pod is a podcast hosted by <strong>Stacy Cashmore</strong> — developer advocate,
-        conference speaker, and the Redhead in a Swing Dress — where members of the
-        developer community sit down to talk about <strong>tech, life, and what brings them joy</strong>.
+        Redhead Pod is a podcast hosted by <strong>Stacy Cashmore</strong> — developer
+        advocate, conference speaker, and the Redhead in a Swing Dress — where members
+        of the developer community sit down to talk about
+        <strong>tech, life, and what brings them joy</strong>.
       </p>
       <p>
         Expect honest conversations, a little wit, and the occasional bit of magic.
@@ -552,16 +468,16 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════ NOTIFY ════════ -->
+  <!-- ════════════════════════════════════ NOTIFY ═══════════ -->
   <section id="notify">
     <div class="inner">
 
       <h2>Be the first to know</h2>
 
-      <div class="marquee-divider" aria-hidden="true">
-        <span class="line"></span>
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-        <span class="line"></span>
+      <div class="divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-star">✦</span>
+        <span class="divider-line"></span>
       </div>
 
       <p>Drop your email and we'll let you know the moment the first episode drops.</p>
@@ -576,7 +492,7 @@
           required
           autocomplete="email"
         />
-        <button type="submit" class="btn-red">Notify me</button>
+        <button type="submit" class="btn-sky">Notify me</button>
       </form>
       <p class="form-note">No spam. Unsubscribe any time.</p>
 
@@ -593,116 +509,16 @@
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════════ FOOTER ══════ -->
+  <!-- ══════════════════════════════════════ FOOTER ══════════ -->
+  <!-- Deep indigo — the night-sky burst colour from the illustration -->
   <footer>
     <span class="footer-brand">Redhead Pod</span>
     <p>&copy; <span id="yr"></span> Stacy Cashmore. All rights reserved.</p>
   </footer>
 
-  <!-- ── Scripts ──────────────────────────────────────────────── -->
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    /* ── Hand-drawn atomic stars (matching the illustration style) ─
-       The illustration uses simple '+' / snowflake shapes:
-       a central dot + short radiating lines + tiny end-circles     */
-    (function () {
-      const canvas = document.getElementById('stars-canvas');
-      const ctx    = canvas.getContext('2d');
-      let   stars  = [];
-
-      const COUNT = 160;
-
-      function resize() {
-        canvas.width  = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-
-      function rand(min, max) { return Math.random() * (max - min) + min; }
-
-      function initStars() {
-        stars = [];
-        for (let i = 0; i < COUNT; i++) {
-          /* Mix of simple + cross marks and 6-arm snowflake shapes
-             (just like the hand-drawn ones in the illustration)     */
-          const type = Math.random() < 0.35 ? 'snowflake' : 'cross';
-          stars.push({
-            x:     rand(0, canvas.width),
-            y:     rand(0, canvas.height),
-            size:  rand(4, type === 'snowflake' ? 14 : 8),
-            type,
-            speed: rand(0.002, 0.008),
-            phase: rand(0, Math.PI * 2),
-          });
-        }
-      }
-
-      /* Simple hand-drawn + cross */
-      function drawCross(x, y, size, alpha) {
-        ctx.save();
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = 'rgba(255,255,255,1)';
-        ctx.lineWidth   = Math.max(0.8, size * 0.12);
-        ctx.lineCap     = 'round';
-        ctx.beginPath();
-        ctx.moveTo(x - size, y); ctx.lineTo(x + size, y);
-        ctx.moveTo(x, y - size); ctx.lineTo(x, y + size);
-        ctx.stroke();
-        ctx.restore();
-      }
-
-      /* 6-arm snowflake like the bigger ones in the illustration */
-      function drawSnowflake(x, y, size, alpha) {
-        ctx.save();
-        ctx.globalAlpha = alpha;
-        ctx.strokeStyle = 'rgba(255,255,255,1)';
-        ctx.lineWidth   = Math.max(0.8, size * 0.09);
-        ctx.lineCap     = 'round';
-        const arms = 6;
-        for (let i = 0; i < arms; i++) {
-          const angle = (Math.PI * 2 / arms) * i;
-          const ex = x + Math.cos(angle) * size;
-          const ey = y + Math.sin(angle) * size;
-          ctx.beginPath();
-          ctx.moveTo(x, y);
-          ctx.lineTo(ex, ey);
-          ctx.stroke();
-          /* Small circle at tip */
-          ctx.beginPath();
-          ctx.arc(ex, ey, size * 0.1, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255,255,255,1)';
-          ctx.fill();
-        }
-        /* Centre dot */
-        ctx.beginPath();
-        ctx.arc(x, y, size * 0.12, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,1)';
-        ctx.fill();
-        ctx.restore();
-      }
-
-      function draw(t) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (const s of stars) {
-          const a = 0.15 + 0.55 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
-          if (s.type === 'snowflake') {
-            drawSnowflake(s.x, s.y, s.size, a);
-          } else {
-            drawCross(s.x, s.y, s.size, a);
-          }
-        }
-        requestAnimationFrame(draw);
-      }
-
-      resize();
-      initStars();
-      window.addEventListener('resize', () => { resize(); initStars(); });
-
-      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if (!mq.matches) requestAnimationFrame(draw);
-    }());
-
-    /* ── Email form placeholder UX ────────────────────────────── */
     document.querySelector('.notify-form').addEventListener('submit', function (e) {
       e.preventDefault();
       const input = this.querySelector('input[type="email"]');
