@@ -101,18 +101,15 @@
       display: block;
       width: 100%;
       height: auto;
-      /* Fade the very bottom edge into the sky background */
-      mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+      /* Fade the very top edge into the sky background */
+      mask-image: linear-gradient(to top, black 75%, transparent 100%);
     }
 
-    /* Title block sits directly under the illustration,
+    /* Title block sits above the illustration,
        on the same sky-blue background so it reads as one canvas   */
     .hero-text {
-      padding: 0 1.5rem 5rem;
+      padding: 3rem 1.5rem 2rem;
       text-align: center;
-      /* Overlap slightly upward so the lavender ground in the image
-         transitions into the sky-coloured area here               */
-      margin-top: -15vw;
       position: relative;
       z-index: 1;
     }
@@ -374,6 +371,14 @@
   <!-- ════════════════════════════════════════ HERO ══════════ -->
   <section id="hero">
 
+    <!-- Title lives on the same sky-blue background as the illustration -->
+    <div class="hero-text">
+      <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
+      <h1 class="hero-title">Redhead Pod</h1>
+      <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
+      <span class="coming-soon-badge">Coming Soon</span>
+    </div>
+
     <!-- Brand illustration — fills the full width, no dark overlay -->
     <img
       class="hero-banner"
@@ -382,14 +387,6 @@
       width="2550"
       height="1440"
     />
-
-    <!-- Title lives on the same sky-blue background as the illustration -->
-    <div class="hero-text">
-      <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
-      <h1 class="hero-title">Redhead Pod</h1>
-      <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
-      <span class="coming-soon-badge">Coming Soon</span>
-    </div>
 
     <div class="scroll-hint" aria-hidden="true">
       <span>Scroll</span>
