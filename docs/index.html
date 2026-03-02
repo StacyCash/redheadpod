@@ -101,14 +101,21 @@
       display: block;
       width: 100%;
       height: auto;
-      /* Fade the very top edge into the sky background */
-      mask-image: linear-gradient(to top, black 75%, transparent 100%);
+      /* Fade both edges so image blends into the sky above and below */
+      mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
     }
 
-    /* Title block sits above the illustration,
-       on the same sky-blue background so it reads as one canvas   */
+    /* Title block above the illustration — sits on the plain sky background */
     .hero-text {
-      padding: 3rem 1.5rem 2rem;
+      padding: 3rem 1.5rem 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sub-text below the illustration — same sky background, no extra decoration */
+    .hero-text-below {
+      padding: 1rem 1.5rem 5rem;
       text-align: center;
       position: relative;
       z-index: 1;
@@ -139,7 +146,7 @@
       font-size: clamp(1rem, 2.2vw, 1.3rem);
       color: var(--indigo);
       opacity: 0.7;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
     }
 
     /* "Coming Soon" — echoes the sign in the illustration.
@@ -371,12 +378,10 @@
   <!-- ════════════════════════════════════════ HERO ══════════ -->
   <section id="hero">
 
-    <!-- Title lives on the same sky-blue background as the illustration -->
+    <!-- Eyebrow + title sit above the illustration on the plain sky background -->
     <div class="hero-text">
       <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
       <h1 class="hero-title">Redhead Pod</h1>
-      <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
-      <span class="coming-soon-badge">Coming Soon</span>
     </div>
 
     <!-- Brand illustration — fills the full width, no dark overlay -->
@@ -387,6 +392,12 @@
       width="2550"
       height="1440"
     />
+
+    <!-- Sub-text + badge below the illustration — completes the picture sandwich -->
+    <div class="hero-text-below">
+      <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
+      <span class="coming-soon-badge">Coming Soon</span>
+    </div>
 
     <div class="scroll-hint" aria-hidden="true">
       <span>Scroll</span>
