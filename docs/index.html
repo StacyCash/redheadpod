@@ -101,8 +101,14 @@
       display: block;
       width: 100%;
       height: auto;
-      /* Fade both edges so image blends into the sky above and below */
-      mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+      /* Pull image up so its top ~20% (sky portion) slides under the hero text.
+         Image height ≈ 56.47 vw (2550×1440 aspect ratio); 20% of that ≈ 11.3 vw */
+      margin-top: -11.3vw;
+      position: relative;
+      z-index: 0;
+      /* Top fade ends at ~22% so the image is fully opaque as it
+         emerges from beneath the text; bottom fades back to sky    */
+      mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 88%, transparent 100%);
     }
 
     /* Title block above the illustration — sits on the plain sky background */
