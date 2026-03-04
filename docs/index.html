@@ -101,18 +101,28 @@
       display: block;
       width: 100%;
       height: auto;
-      /* Fade the very bottom edge into the sky background */
-      mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+      /* Pull image up so its top ~20% (sky portion) slides under the hero text.
+         Image height ≈ 56.47 vw (2550×1440 aspect ratio); 20% of that ≈ 11.3 vw */
+      margin-top: -11.3vw;
+      position: relative;
+      z-index: 0;
+      /* Top fade ends at ~22% so the image is fully opaque as it
+         emerges from beneath the text; bottom fades back to sky    */
+      mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 88%, transparent 100%);
     }
 
-    /* Title block sits directly under the illustration,
-       on the same sky-blue background so it reads as one canvas   */
+    /* Title block above the illustration — sits on the plain sky background */
     .hero-text {
-      padding: 0 1.5rem 5rem;
+      padding: 3rem 1.5rem 1rem;
       text-align: center;
-      /* Overlap slightly upward so the lavender ground in the image
-         transitions into the sky-coloured area here               */
-      margin-top: -15vw;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sub-text below the illustration — same sky background, no extra decoration */
+    .hero-text-below {
+      padding: 1rem 1.5rem 5rem;
+      text-align: center;
       position: relative;
       z-index: 1;
     }
@@ -142,7 +152,7 @@
       font-size: clamp(1rem, 2.2vw, 1.3rem);
       color: var(--indigo);
       opacity: 0.7;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
     }
 
     /* "Coming Soon" — echoes the sign in the illustration.
@@ -374,6 +384,12 @@
   <!-- ════════════════════════════════════════ HERO ══════════ -->
   <section id="hero">
 
+    <!-- Eyebrow + title sit above the illustration on the plain sky background -->
+    <div class="hero-text">
+      <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
+      <h1 class="hero-title">Redhead Pod</h1>
+    </div>
+
     <!-- Brand illustration — fills the full width, no dark overlay -->
     <img
       class="hero-banner"
@@ -383,10 +399,8 @@
       height="1440"
     />
 
-    <!-- Title lives on the same sky-blue background as the illustration -->
-    <div class="hero-text">
-      <p class="hero-eyebrow">from the Redhead in a Swing Dress</p>
-      <h1 class="hero-title">Redhead Pod</h1>
+    <!-- Sub-text + badge below the illustration — completes the picture sandwich -->
+    <div class="hero-text-below">
       <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
       <span class="coming-soon-badge">Coming Soon</span>
     </div>
