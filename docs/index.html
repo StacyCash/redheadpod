@@ -365,6 +365,74 @@
       opacity: 0.6;
     }
 
+    /* ════════════════════════════════════ CFP ════════════════ */
+    .cfp-block {
+      margin-top: 2.5rem;
+      padding: 1.8rem 1.5rem 2rem;
+      background: var(--indigo);
+      color: var(--lavender-lt);
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cfp-block h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+      font-weight: 700;
+      color: var(--sky);
+      margin-bottom: 0.4rem;
+    }
+
+    .cfp-intro {
+      font-size: clamp(0.88rem, 1.7vw, 1rem);
+      color: var(--lavender);
+      margin-bottom: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .cfp-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem;
+      text-align: left;
+      display: inline-block;
+    }
+
+    .cfp-list li {
+      font-size: clamp(0.85rem, 1.6vw, 0.97rem);
+      color: var(--lavender);
+      padding: 0.3rem 0 0.3rem 1.4rem;
+      position: relative;
+      opacity: 0.9;
+    }
+
+    .cfp-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--sky-mid);
+      font-size: 0.65rem;
+      top: 0.45rem;
+    }
+
+    .btn-cfp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--sky-mid);
+      color: var(--indigo-dim);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.07em;
+      padding: 0.75rem 1.8rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-cfp:hover  { background: var(--sky-dark); color: var(--white); transform: translateY(-1px); }
+    .btn-cfp:active { transform: translateY(0); }
+
     /* ── Accessibility ─────────────────────────────────────────── */
     :focus-visible { outline: 2px solid var(--sky-mid); outline-offset: 3px; }
 
@@ -403,6 +471,26 @@
     <div class="hero-text-below">
       <p class="hero-sub">tech &nbsp;·&nbsp; life &nbsp;·&nbsp; joy</p>
       <span class="coming-soon-badge">Coming Soon</span>
+
+      <div class="cfp-block">
+        <h2>Want to be a guest?</h2>
+        <p class="cfp-intro">Submit a session pitch and come talk tech — and life — with Stacy.</p>
+        <ul class="cfp-list">
+          <li>One submission per person — pick the tech topic you love most</li>
+          <li>Use the <strong>Notes</strong> field to share a little about yourself: hobbies, health, community, music — anything that brings you joy outside of code</li>
+        </ul>
+        <a
+          href="https://sessionize.com/redheadpod/"
+          class="btn-cfp"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Submit a session pitch for Redhead Pod on Sessionize"
+        >
+          <!-- Microphone icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          Submit a pitch
+        </a>
+      </div>
     </div>
 
     <div class="scroll-hint" aria-hidden="true">
