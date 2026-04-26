@@ -99,13 +99,12 @@
     /* The brand illustration — full width, no cropping, no dark bg */
     .hero-banner {
       display: block;
-      width: auto;
-      height: 75vh;
+      width: 100%;
+      height: auto;
       /* Pull image up so its top ~20% (sky portion) slides under the hero text.
          Image height ≈ 56.47 vw (2550×1440 aspect ratio); 20% of that ≈ 11.3 vw */
       margin-top: -11.3vw;
       position: relative;
-      margin: -11.3vw auto 0
       z-index: 0;
       /* Top fade ends at ~22% so the image is fully opaque as it
          emerges from beneath the text; bottom fades back to sky    */
