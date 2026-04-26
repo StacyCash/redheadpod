@@ -108,7 +108,10 @@
       z-index: 0;
       /* Top fade ends at ~22% so the image is fully opaque as it
          emerges from beneath the text; bottom fades back to sky    */
-      mask-image: linear-gradient(to bottom, transparent 0%, black 22%, black 88%, transparent 100%);
+      mask-image:
+       linear-gradient(to bottom, transparent 0%, black 22%, black 88%, transparent 100%),
+       linear-gradient(to right,  transparent 0%, black 10%, black 90%, transparent 100%);
+      mask-composite: intersect;
     }
 
     /* Title block above the illustration — sits on the plain sky background */
